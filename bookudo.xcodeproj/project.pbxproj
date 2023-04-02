@@ -12,16 +12,6 @@
 		AD7E7AFF29D9E319009E12C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7E7AFE29D9E319009E12C0 /* Preview Assets.xcassets */; };
 		AD7E7B0129D9E319009E12C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0029D9E319009E12C0 /* Persistence.swift */; };
 		AD7E7B0429D9E31A009E12C0 /* bookudo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0229D9E319009E12C0 /* bookudo.xcdatamodeld */; };
-		AD7E7B1529DA1825009E12C0 /* PageImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0B29DA1825009E12C0 /* PageImage+CoreDataClass.swift */; };
-		AD7E7B1629DA1825009E12C0 /* PageImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0C29DA1825009E12C0 /* PageImage+CoreDataProperties.swift */; };
-		AD7E7B1729DA1825009E12C0 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0D29DA1825009E12C0 /* Goal+CoreDataClass.swift */; };
-		AD7E7B1829DA1825009E12C0 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0E29DA1825009E12C0 /* Goal+CoreDataProperties.swift */; };
-		AD7E7B1929DA1825009E12C0 /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0F29DA1825009E12C0 /* Book+CoreDataClass.swift */; };
-		AD7E7B1A29DA1825009E12C0 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1029DA1825009E12C0 /* Book+CoreDataProperties.swift */; };
-		AD7E7B1B29DA1825009E12C0 /* Unit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1129DA1825009E12C0 /* Unit+CoreDataClass.swift */; };
-		AD7E7B1C29DA1825009E12C0 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1229DA1825009E12C0 /* Unit+CoreDataProperties.swift */; };
-		AD7E7B1D29DA1825009E12C0 /* History+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1329DA1825009E12C0 /* History+CoreDataClass.swift */; };
-		AD7E7B1E29DA1825009E12C0 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1429DA1825009E12C0 /* History+CoreDataProperties.swift */; };
 		AD7E7B3329DA1B07009E12C0 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2229DA1B06009E12C0 /* ChartData.swift */; };
 		AD7E7B3429DA1B07009E12C0 /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2329DA1B06009E12C0 /* ChartType.swift */; };
 		AD7E7B3529DA1B07009E12C0 /* HashableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */; };
@@ -39,6 +29,16 @@
 		AD7E7B4129DA1B07009E12C0 /* BookSummaryListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B3129DA1B07009E12C0 /* BookSummaryListItemView.swift */; };
 		AD7E7B4229DA1B07009E12C0 /* UpdateGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B3229DA1B07009E12C0 /* UpdateGoalsView.swift */; };
 		AD7E7B4429DA2256009E12C0 /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AD7E7B4329DA2256009E12C0 /* TODO.rtf */; };
+		AD7E7B4F29DA4253009E12C0 /* PageImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4529DA4253009E12C0 /* PageImage+CoreDataClass.swift */; };
+		AD7E7B5029DA4253009E12C0 /* PageImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4629DA4253009E12C0 /* PageImage+CoreDataProperties.swift */; };
+		AD7E7B5129DA4253009E12C0 /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4729DA4253009E12C0 /* Book+CoreDataClass.swift */; };
+		AD7E7B5229DA4253009E12C0 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4829DA4253009E12C0 /* Book+CoreDataProperties.swift */; };
+		AD7E7B5329DA4253009E12C0 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4929DA4253009E12C0 /* Goal+CoreDataClass.swift */; };
+		AD7E7B5429DA4253009E12C0 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4A29DA4253009E12C0 /* Goal+CoreDataProperties.swift */; };
+		AD7E7B5529DA4253009E12C0 /* History+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4B29DA4253009E12C0 /* History+CoreDataClass.swift */; };
+		AD7E7B5629DA4253009E12C0 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4C29DA4253009E12C0 /* History+CoreDataProperties.swift */; };
+		AD7E7B5729DA4253009E12C0 /* Unit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4D29DA4253009E12C0 /* Unit+CoreDataClass.swift */; };
+		AD7E7B5829DA4253009E12C0 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4E29DA4253009E12C0 /* Unit+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,16 +48,6 @@
 		AD7E7AFE29D9E319009E12C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD7E7B0029D9E319009E12C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AD7E7B0329D9E319009E12C0 /* bookudo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bookudo.xcdatamodel; sourceTree = "<group>"; };
-		AD7E7B0B29DA1825009E12C0 /* PageImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageImage+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B0C29DA1825009E12C0 /* PageImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageImage+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B0D29DA1825009E12C0 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B0E29DA1825009E12C0 /* Goal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B0F29DA1825009E12C0 /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B1029DA1825009E12C0 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B1129DA1825009E12C0 /* Unit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B1229DA1825009E12C0 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B1329DA1825009E12C0 /* History+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		AD7E7B1429DA1825009E12C0 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		AD7E7B2229DA1B06009E12C0 /* ChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		AD7E7B2329DA1B06009E12C0 /* ChartType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableImage.swift; sourceTree = "<group>"; };
@@ -75,6 +65,16 @@
 		AD7E7B3129DA1B07009E12C0 /* BookSummaryListItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSummaryListItemView.swift; sourceTree = "<group>"; };
 		AD7E7B3229DA1B07009E12C0 /* UpdateGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateGoalsView.swift; sourceTree = "<group>"; };
 		AD7E7B4329DA2256009E12C0 /* TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
+		AD7E7B4529DA4253009E12C0 /* PageImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageImage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AD7E7B4629DA4253009E12C0 /* PageImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageImage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AD7E7B4729DA4253009E12C0 /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AD7E7B4829DA4253009E12C0 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AD7E7B4929DA4253009E12C0 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AD7E7B4A29DA4253009E12C0 /* Goal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AD7E7B4B29DA4253009E12C0 /* History+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AD7E7B4C29DA4253009E12C0 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AD7E7B4D29DA4253009E12C0 /* Unit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AD7E7B4E29DA4253009E12C0 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,16 +131,16 @@
 		AD7E7B0A29D9E49F009E12C0 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				AD7E7B0B29DA1825009E12C0 /* PageImage+CoreDataClass.swift */,
-				AD7E7B0C29DA1825009E12C0 /* PageImage+CoreDataProperties.swift */,
-				AD7E7B0D29DA1825009E12C0 /* Goal+CoreDataClass.swift */,
-				AD7E7B0E29DA1825009E12C0 /* Goal+CoreDataProperties.swift */,
-				AD7E7B0F29DA1825009E12C0 /* Book+CoreDataClass.swift */,
-				AD7E7B1029DA1825009E12C0 /* Book+CoreDataProperties.swift */,
-				AD7E7B1129DA1825009E12C0 /* Unit+CoreDataClass.swift */,
-				AD7E7B1229DA1825009E12C0 /* Unit+CoreDataProperties.swift */,
-				AD7E7B1329DA1825009E12C0 /* History+CoreDataClass.swift */,
-				AD7E7B1429DA1825009E12C0 /* History+CoreDataProperties.swift */,
+				AD7E7B4529DA4253009E12C0 /* PageImage+CoreDataClass.swift */,
+				AD7E7B4629DA4253009E12C0 /* PageImage+CoreDataProperties.swift */,
+				AD7E7B4729DA4253009E12C0 /* Book+CoreDataClass.swift */,
+				AD7E7B4829DA4253009E12C0 /* Book+CoreDataProperties.swift */,
+				AD7E7B4929DA4253009E12C0 /* Goal+CoreDataClass.swift */,
+				AD7E7B4A29DA4253009E12C0 /* Goal+CoreDataProperties.swift */,
+				AD7E7B4B29DA4253009E12C0 /* History+CoreDataClass.swift */,
+				AD7E7B4C29DA4253009E12C0 /* History+CoreDataProperties.swift */,
+				AD7E7B4D29DA4253009E12C0 /* Unit+CoreDataClass.swift */,
+				AD7E7B4E29DA4253009E12C0 /* Unit+CoreDataProperties.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -247,34 +247,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD7E7B3829DA1B07009E12C0 /* ChartService.swift in Sources */,
-				AD7E7B1E29DA1825009E12C0 /* History+CoreDataProperties.swift in Sources */,
+				AD7E7B5129DA4253009E12C0 /* Book+CoreDataClass.swift in Sources */,
 				AD7E7B3D29DA1B07009E12C0 /* ImagePicker.swift in Sources */,
+				AD7E7B5629DA4253009E12C0 /* History+CoreDataProperties.swift in Sources */,
+				AD7E7B5329DA4253009E12C0 /* Goal+CoreDataClass.swift in Sources */,
+				AD7E7B5429DA4253009E12C0 /* Goal+CoreDataProperties.swift in Sources */,
 				AD7E7B3629DA1B07009E12C0 /* AddBookView.swift in Sources */,
 				AD7E7B3329DA1B07009E12C0 /* ChartData.swift in Sources */,
+				AD7E7B5029DA4253009E12C0 /* PageImage+CoreDataProperties.swift in Sources */,
 				AD7E7B0129D9E319009E12C0 /* Persistence.swift in Sources */,
 				AD7E7B3C29DA1B07009E12C0 /* PageImagesView.swift in Sources */,
 				AD7E7B3729DA1B07009E12C0 /* ProgressGoalChartView.swift in Sources */,
 				AD7E7B3B29DA1B07009E12C0 /* GoalsView.swift in Sources */,
 				AD7E7B4129DA1B07009E12C0 /* BookSummaryListItemView.swift in Sources */,
 				AD7E7B3A29DA1B07009E12C0 /* BookSummaryListView.swift in Sources */,
-				AD7E7B1929DA1825009E12C0 /* Book+CoreDataClass.swift in Sources */,
+				AD7E7B5529DA4253009E12C0 /* History+CoreDataClass.swift in Sources */,
 				AD7E7B4229DA1B07009E12C0 /* UpdateGoalsView.swift in Sources */,
 				AD7E7B3529DA1B07009E12C0 /* HashableImage.swift in Sources */,
 				AD7E7B3F29DA1B07009E12C0 /* AddImageView.swift in Sources */,
+				AD7E7B5729DA4253009E12C0 /* Unit+CoreDataClass.swift in Sources */,
 				AD7E7B4029DA1B07009E12C0 /* SplashView.swift in Sources */,
+				AD7E7B5829DA4253009E12C0 /* Unit+CoreDataProperties.swift in Sources */,
+				AD7E7B4F29DA4253009E12C0 /* PageImage+CoreDataClass.swift in Sources */,
 				AD7E7B3E29DA1B07009E12C0 /* UpdateBookStatusView.swift in Sources */,
-				AD7E7B1729DA1825009E12C0 /* Goal+CoreDataClass.swift in Sources */,
-				AD7E7B1529DA1825009E12C0 /* PageImage+CoreDataClass.swift in Sources */,
-				AD7E7B1629DA1825009E12C0 /* PageImage+CoreDataProperties.swift in Sources */,
-				AD7E7B1B29DA1825009E12C0 /* Unit+CoreDataClass.swift in Sources */,
+				AD7E7B5229DA4253009E12C0 /* Book+CoreDataProperties.swift in Sources */,
 				AD7E7B3929DA1B07009E12C0 /* BookDetailView.swift in Sources */,
 				AD7E7AF829D9E317009E12C0 /* bookudoApp.swift in Sources */,
-				AD7E7B1D29DA1825009E12C0 /* History+CoreDataClass.swift in Sources */,
-				AD7E7B1829DA1825009E12C0 /* Goal+CoreDataProperties.swift in Sources */,
-				AD7E7B1A29DA1825009E12C0 /* Book+CoreDataProperties.swift in Sources */,
 				AD7E7B0429D9E31A009E12C0 /* bookudo.xcdatamodeld in Sources */,
 				AD7E7B3429DA1B07009E12C0 /* ChartType.swift in Sources */,
-				AD7E7B1C29DA1825009E12C0 /* Unit+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
