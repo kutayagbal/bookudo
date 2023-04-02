@@ -8,21 +8,73 @@
 
 /* Begin PBXBuildFile section */
 		AD7E7AF829D9E317009E12C0 /* bookudoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7AF729D9E317009E12C0 /* bookudoApp.swift */; };
-		AD7E7AFA29D9E317009E12C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7AF929D9E317009E12C0 /* ContentView.swift */; };
 		AD7E7AFC29D9E319009E12C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7E7AFB29D9E319009E12C0 /* Assets.xcassets */; };
 		AD7E7AFF29D9E319009E12C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7E7AFE29D9E319009E12C0 /* Preview Assets.xcassets */; };
 		AD7E7B0129D9E319009E12C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0029D9E319009E12C0 /* Persistence.swift */; };
 		AD7E7B0429D9E31A009E12C0 /* bookudo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0229D9E319009E12C0 /* bookudo.xcdatamodeld */; };
+		AD7E7B1529DA1825009E12C0 /* PageImage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0B29DA1825009E12C0 /* PageImage+CoreDataClass.swift */; };
+		AD7E7B1629DA1825009E12C0 /* PageImage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0C29DA1825009E12C0 /* PageImage+CoreDataProperties.swift */; };
+		AD7E7B1729DA1825009E12C0 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0D29DA1825009E12C0 /* Goal+CoreDataClass.swift */; };
+		AD7E7B1829DA1825009E12C0 /* Goal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0E29DA1825009E12C0 /* Goal+CoreDataProperties.swift */; };
+		AD7E7B1929DA1825009E12C0 /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0F29DA1825009E12C0 /* Book+CoreDataClass.swift */; };
+		AD7E7B1A29DA1825009E12C0 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1029DA1825009E12C0 /* Book+CoreDataProperties.swift */; };
+		AD7E7B1B29DA1825009E12C0 /* Unit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1129DA1825009E12C0 /* Unit+CoreDataClass.swift */; };
+		AD7E7B1C29DA1825009E12C0 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1229DA1825009E12C0 /* Unit+CoreDataProperties.swift */; };
+		AD7E7B1D29DA1825009E12C0 /* History+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1329DA1825009E12C0 /* History+CoreDataClass.swift */; };
+		AD7E7B1E29DA1825009E12C0 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B1429DA1825009E12C0 /* History+CoreDataProperties.swift */; };
+		AD7E7B3329DA1B07009E12C0 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2229DA1B06009E12C0 /* ChartData.swift */; };
+		AD7E7B3429DA1B07009E12C0 /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2329DA1B06009E12C0 /* ChartType.swift */; };
+		AD7E7B3529DA1B07009E12C0 /* HashableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */; };
+		AD7E7B3629DA1B07009E12C0 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2629DA1B07009E12C0 /* AddBookView.swift */; };
+		AD7E7B3729DA1B07009E12C0 /* ProgressGoalChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2729DA1B07009E12C0 /* ProgressGoalChartView.swift */; };
+		AD7E7B3829DA1B07009E12C0 /* ChartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2829DA1B07009E12C0 /* ChartService.swift */; };
+		AD7E7B3929DA1B07009E12C0 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2929DA1B07009E12C0 /* BookDetailView.swift */; };
+		AD7E7B3A29DA1B07009E12C0 /* BookSummaryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2A29DA1B07009E12C0 /* BookSummaryListView.swift */; };
+		AD7E7B3B29DA1B07009E12C0 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2B29DA1B07009E12C0 /* GoalsView.swift */; };
+		AD7E7B3C29DA1B07009E12C0 /* PageImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2C29DA1B07009E12C0 /* PageImagesView.swift */; };
+		AD7E7B3D29DA1B07009E12C0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2D29DA1B07009E12C0 /* ImagePicker.swift */; };
+		AD7E7B3E29DA1B07009E12C0 /* UpdateBookStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2E29DA1B07009E12C0 /* UpdateBookStatusView.swift */; };
+		AD7E7B3F29DA1B07009E12C0 /* AddImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2F29DA1B07009E12C0 /* AddImageView.swift */; };
+		AD7E7B4029DA1B07009E12C0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B3029DA1B07009E12C0 /* SplashView.swift */; };
+		AD7E7B4129DA1B07009E12C0 /* BookSummaryListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B3129DA1B07009E12C0 /* BookSummaryListItemView.swift */; };
+		AD7E7B4229DA1B07009E12C0 /* UpdateGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B3229DA1B07009E12C0 /* UpdateGoalsView.swift */; };
+		AD7E7B4429DA2256009E12C0 /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AD7E7B4329DA2256009E12C0 /* TODO.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AD7E7AF429D9E317009E12C0 /* bookudo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bookudo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD7E7AF729D9E317009E12C0 /* bookudoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookudoApp.swift; sourceTree = "<group>"; };
-		AD7E7AF929D9E317009E12C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AD7E7AFB29D9E319009E12C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD7E7AFE29D9E319009E12C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD7E7B0029D9E319009E12C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AD7E7B0329D9E319009E12C0 /* bookudo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bookudo.xcdatamodel; sourceTree = "<group>"; };
+		AD7E7B0B29DA1825009E12C0 /* PageImage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageImage+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B0C29DA1825009E12C0 /* PageImage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageImage+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B0D29DA1825009E12C0 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B0E29DA1825009E12C0 /* Goal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B0F29DA1825009E12C0 /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B1029DA1825009E12C0 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B1129DA1825009E12C0 /* Unit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B1229DA1825009E12C0 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B1329DA1825009E12C0 /* History+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B1429DA1825009E12C0 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AD7E7B2229DA1B06009E12C0 /* ChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
+		AD7E7B2329DA1B06009E12C0 /* ChartType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
+		AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableImage.swift; sourceTree = "<group>"; };
+		AD7E7B2629DA1B07009E12C0 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		AD7E7B2729DA1B07009E12C0 /* ProgressGoalChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressGoalChartView.swift; sourceTree = "<group>"; };
+		AD7E7B2829DA1B07009E12C0 /* ChartService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartService.swift; sourceTree = "<group>"; };
+		AD7E7B2929DA1B07009E12C0 /* BookDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
+		AD7E7B2A29DA1B07009E12C0 /* BookSummaryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSummaryListView.swift; sourceTree = "<group>"; };
+		AD7E7B2B29DA1B07009E12C0 /* GoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		AD7E7B2C29DA1B07009E12C0 /* PageImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageImagesView.swift; sourceTree = "<group>"; };
+		AD7E7B2D29DA1B07009E12C0 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		AD7E7B2E29DA1B07009E12C0 /* UpdateBookStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateBookStatusView.swift; sourceTree = "<group>"; };
+		AD7E7B2F29DA1B07009E12C0 /* AddImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageView.swift; sourceTree = "<group>"; };
+		AD7E7B3029DA1B07009E12C0 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		AD7E7B3129DA1B07009E12C0 /* BookSummaryListItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSummaryListItemView.swift; sourceTree = "<group>"; };
+		AD7E7B3229DA1B07009E12C0 /* UpdateGoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateGoalsView.swift; sourceTree = "<group>"; };
+		AD7E7B4329DA2256009E12C0 /* TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +91,7 @@
 		AD7E7AEB29D9E317009E12C0 = {
 			isa = PBXGroup;
 			children = (
+				AD7E7B4329DA2256009E12C0 /* TODO.rtf */,
 				AD7E7AF629D9E317009E12C0 /* bookudo */,
 				AD7E7AF529D9E317009E12C0 /* Products */,
 			);
@@ -55,8 +108,10 @@
 		AD7E7AF629D9E317009E12C0 /* bookudo */ = {
 			isa = PBXGroup;
 			children = (
+				AD7E7B2129DA1B06009E12C0 /* model */,
+				AD7E7B2529DA1B07009E12C0 /* view */,
+				AD7E7B0A29D9E49F009E12C0 /* data */,
 				AD7E7AF729D9E317009E12C0 /* bookudoApp.swift */,
-				AD7E7AF929D9E317009E12C0 /* ContentView.swift */,
 				AD7E7AFB29D9E319009E12C0 /* Assets.xcassets */,
 				AD7E7B0029D9E319009E12C0 /* Persistence.swift */,
 				AD7E7B0229D9E319009E12C0 /* bookudo.xcdatamodeld */,
@@ -71,6 +126,53 @@
 				AD7E7AFE29D9E319009E12C0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AD7E7B0A29D9E49F009E12C0 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				AD7E7B0B29DA1825009E12C0 /* PageImage+CoreDataClass.swift */,
+				AD7E7B0C29DA1825009E12C0 /* PageImage+CoreDataProperties.swift */,
+				AD7E7B0D29DA1825009E12C0 /* Goal+CoreDataClass.swift */,
+				AD7E7B0E29DA1825009E12C0 /* Goal+CoreDataProperties.swift */,
+				AD7E7B0F29DA1825009E12C0 /* Book+CoreDataClass.swift */,
+				AD7E7B1029DA1825009E12C0 /* Book+CoreDataProperties.swift */,
+				AD7E7B1129DA1825009E12C0 /* Unit+CoreDataClass.swift */,
+				AD7E7B1229DA1825009E12C0 /* Unit+CoreDataProperties.swift */,
+				AD7E7B1329DA1825009E12C0 /* History+CoreDataClass.swift */,
+				AD7E7B1429DA1825009E12C0 /* History+CoreDataProperties.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		AD7E7B2129DA1B06009E12C0 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AD7E7B2229DA1B06009E12C0 /* ChartData.swift */,
+				AD7E7B2329DA1B06009E12C0 /* ChartType.swift */,
+				AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		AD7E7B2529DA1B07009E12C0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				AD7E7B2629DA1B07009E12C0 /* AddBookView.swift */,
+				AD7E7B2729DA1B07009E12C0 /* ProgressGoalChartView.swift */,
+				AD7E7B2829DA1B07009E12C0 /* ChartService.swift */,
+				AD7E7B2929DA1B07009E12C0 /* BookDetailView.swift */,
+				AD7E7B2A29DA1B07009E12C0 /* BookSummaryListView.swift */,
+				AD7E7B2B29DA1B07009E12C0 /* GoalsView.swift */,
+				AD7E7B2C29DA1B07009E12C0 /* PageImagesView.swift */,
+				AD7E7B2D29DA1B07009E12C0 /* ImagePicker.swift */,
+				AD7E7B2E29DA1B07009E12C0 /* UpdateBookStatusView.swift */,
+				AD7E7B2F29DA1B07009E12C0 /* AddImageView.swift */,
+				AD7E7B3029DA1B07009E12C0 /* SplashView.swift */,
+				AD7E7B3129DA1B07009E12C0 /* BookSummaryListItemView.swift */,
+				AD7E7B3229DA1B07009E12C0 /* UpdateGoalsView.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +235,7 @@
 			files = (
 				AD7E7AFF29D9E319009E12C0 /* Preview Assets.xcassets in Resources */,
 				AD7E7AFC29D9E319009E12C0 /* Assets.xcassets in Resources */,
+				AD7E7B4429DA2256009E12C0 /* TODO.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,10 +246,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD7E7B3829DA1B07009E12C0 /* ChartService.swift in Sources */,
+				AD7E7B1E29DA1825009E12C0 /* History+CoreDataProperties.swift in Sources */,
+				AD7E7B3D29DA1B07009E12C0 /* ImagePicker.swift in Sources */,
+				AD7E7B3629DA1B07009E12C0 /* AddBookView.swift in Sources */,
+				AD7E7B3329DA1B07009E12C0 /* ChartData.swift in Sources */,
 				AD7E7B0129D9E319009E12C0 /* Persistence.swift in Sources */,
-				AD7E7AFA29D9E317009E12C0 /* ContentView.swift in Sources */,
+				AD7E7B3C29DA1B07009E12C0 /* PageImagesView.swift in Sources */,
+				AD7E7B3729DA1B07009E12C0 /* ProgressGoalChartView.swift in Sources */,
+				AD7E7B3B29DA1B07009E12C0 /* GoalsView.swift in Sources */,
+				AD7E7B4129DA1B07009E12C0 /* BookSummaryListItemView.swift in Sources */,
+				AD7E7B3A29DA1B07009E12C0 /* BookSummaryListView.swift in Sources */,
+				AD7E7B1929DA1825009E12C0 /* Book+CoreDataClass.swift in Sources */,
+				AD7E7B4229DA1B07009E12C0 /* UpdateGoalsView.swift in Sources */,
+				AD7E7B3529DA1B07009E12C0 /* HashableImage.swift in Sources */,
+				AD7E7B3F29DA1B07009E12C0 /* AddImageView.swift in Sources */,
+				AD7E7B4029DA1B07009E12C0 /* SplashView.swift in Sources */,
+				AD7E7B3E29DA1B07009E12C0 /* UpdateBookStatusView.swift in Sources */,
+				AD7E7B1729DA1825009E12C0 /* Goal+CoreDataClass.swift in Sources */,
+				AD7E7B1529DA1825009E12C0 /* PageImage+CoreDataClass.swift in Sources */,
+				AD7E7B1629DA1825009E12C0 /* PageImage+CoreDataProperties.swift in Sources */,
+				AD7E7B1B29DA1825009E12C0 /* Unit+CoreDataClass.swift in Sources */,
+				AD7E7B3929DA1B07009E12C0 /* BookDetailView.swift in Sources */,
 				AD7E7AF829D9E317009E12C0 /* bookudoApp.swift in Sources */,
+				AD7E7B1D29DA1825009E12C0 /* History+CoreDataClass.swift in Sources */,
+				AD7E7B1829DA1825009E12C0 /* Goal+CoreDataProperties.swift in Sources */,
+				AD7E7B1A29DA1825009E12C0 /* Book+CoreDataProperties.swift in Sources */,
 				AD7E7B0429D9E31A009E12C0 /* bookudo.xcdatamodeld in Sources */,
+				AD7E7B3429DA1B07009E12C0 /* ChartType.swift in Sources */,
+				AD7E7B1C29DA1825009E12C0 /* Unit+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -257,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -278,21 +406,27 @@
 				DEVELOPMENT_TEAM = X4S852F582;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Application uses camera to take and save photos of pages for later reference";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktygbl.bookudo.bookudo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktygbl.bookudo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -307,21 +441,27 @@
 				DEVELOPMENT_TEAM = X4S852F582;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Application uses camera to take and save photos of pages for later reference";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ktygbl.bookudo.bookudo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ktygbl.bookudo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

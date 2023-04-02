@@ -13,8 +13,7 @@ struct bookudoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SplashView().environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

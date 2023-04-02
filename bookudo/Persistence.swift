@@ -2,7 +2,7 @@
 //  Persistence.swift
 //  bookudo
 //
-//  Created by Kutay Agbal on 2.04.2023.
+//  Created by Kutay Agbal on 17.01.2023.
 //
 
 import CoreData
@@ -10,21 +10,43 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
+    static var selectedBook: Book? = nil
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        
+        var book = Book(context: viewContext)
+        book.title = "Test test test"
+        book.currentPage = 0
+        book.totalPage = 498
+        
+        let weekGoal = Goal(context: viewContext)
+        weekGoal.title = "weekday"
+        weekGoal.pageCount = 2
+        
+        let weekendGoal = Goal(context: viewContext)
+        weekendGoal.title = "weekend"
+        weekendGoal.pageCount = 4
+        
+        let unit1 = Unit(context: viewContext)
+        unit1.title = "Unit Unit 1"
+        unit1.endPage = 22
+        
+        let unit2 = Unit(context: viewContext)
+        unit2.title = "Unit unit2"
+        unit2.endPage = 44
+
+        book.goals = [weekGoal, weekendGoal]
+        book.units = [unit1, unit2]
         do {
+            book.updateDate = Date()
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+        
+        selectedBook = book
         return result
     }()
 
@@ -37,17 +59,6 @@ struct PersistenceController {
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
