@@ -103,7 +103,7 @@ struct BookDetailView: View {
         }.toolbar {
             ToolbarItem {
                 Button(action: presentConfirmation) {
-                    Label("Delete Book", systemImage: "minus").foregroundColor(.red)
+                    Label("Delete Book", systemImage: "minus").foregroundColor(.red).font(Font.system(size: 25))
                 }
             }
         }.onAppear(perform:createProgressData).sheet(isPresented: $presentUpdateBookStatusView, onDismiss: onDissmiss) {

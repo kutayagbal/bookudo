@@ -29,7 +29,7 @@ struct BookSummaryListView: View {
                 }.toolbar {
                     ToolbarItem {
                         Button(action: openAddBookView) {
-                            Label("Add Book", systemImage: "plus")
+                            Label("Add Book", systemImage: "plus").font(Font.system(size: 25))
                         }
                     }
                 }.sheet(isPresented: $presentAddBookView) {
@@ -45,7 +45,7 @@ struct BookSummaryListView: View {
                     }.toolbar {
                             ToolbarItem {
                                 Button(action: openAddBookView) {
-                                    Label("Add Book", systemImage: "plus")
+                                    Label("Add Book", systemImage: "plus").font(Font.system(size: 25))
                                 }
                             }
                         }.sheet(isPresented: $presentAddBookView) {
