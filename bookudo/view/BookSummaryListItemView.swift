@@ -24,7 +24,7 @@ struct BookSummaryListItemView: View {
                     Text(book.subTitle!).font(Font.subheadline).multilineTextAlignment(.center)
                 }
                 
-                Divider().padding([.bottom, .top], 3)
+                Divider().padding(.bottom, 7)
                 
                 HStack{
                     VStack{
