@@ -16,90 +16,100 @@ struct PageImagesView: View {
     @State private var expandedImg: HashableImage?
 
     var body: some View {
-        if expandedImg != nil{
-            VStack{
-                Text(book.title!).font(.title2).padding(3)
-                if book.subTitle != nil{
-                    Text(book.subTitle!).font(.caption).padding(2)
-                }
-            }.padding(.top, 40)
-            
-            HStack{
-                Text("Page: " + String(expandedImg!.pageNo!)).font(.title3).padding()
-                Spacer()
-                Button("DELETE") {
-                    presentConfirmDelete.toggle()
-                                        }.foregroundColor(.red).cornerRadius(10).padding().overlay(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(.red, lineWidth: 1))
-                                        .padding(.trailing)
-            }.padding()
-                .confirmationDialog("", isPresented: $presentConfirmDelete){
-                Button("Delete image", role: .destructive) {
-                    deleteImage()
-                }
-            }
-            
-            Image(uiImage: expandedImg!.image).resizable().scaledToFit().onTapGesture {
-                expandedImg = nil
-            }.cornerRadius(10.0)
-            Spacer()
-        }else{
-            VStack{
+        VStack{
+            if expandedImg != nil{
                 VStack{
                     Text(book.title!).font(.title2).padding(3)
                     if book.subTitle != nil{
                         Text(book.subTitle!).font(.caption).padding(2)
                     }
                 }.padding(.top, 40)
-                List(book.units?.array as! [Unit], id: \.id) { unit in
-                    if expandedUnit == unit{
-                        VStack{
+                
+                HStack{
+                    Text("Page: " + String(expandedImg!.pageNo!)).font(.title3).padding()
+                    Spacer()
+                    Button("DELETE") {
+                        presentConfirmDelete.toggle()
+                                            }.foregroundColor(.red).cornerRadius(10).padding().overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(.red, lineWidth: 1))
+                                            .padding(.trailing)
+                }.padding()
+                    .confirmationDialog("", isPresented: $presentConfirmDelete){
+                    Button("Delete image", role: .destructive) {
+                        deleteImage()
+                    }
+                }
+                
+                Image(uiImage: expandedImg!.image).resizable().scaledToFit().onTapGesture {
+                    withAnimation{
+                        expandedImg = nil
+                    }
+                }.cornerRadius(10.0)
+                Spacer()
+            }else{
+                VStack{
+                    VStack{
+                        Text(book.title!).font(.title2).padding(3)
+                        if book.subTitle != nil{
+                            Text(book.subTitle!).font(.caption).padding(2)
+                        }
+                    }.padding(.top, 40)
+                    List(book.units?.array as! [Unit], id: \.id) { unit in
+                        if expandedUnit == unit{
+                            VStack{
+                                HStack{
+                                    Text(unit.title!)
+                                    Spacer()
+                                    Text(String(getImageCount(unit: unit)))
+                                }.padding([.top,.bottom]).contentShape(Rectangle()).onTapGesture {
+                                    withAnimation{
+                                        expandedUnit = nil
+                                    }
+                                }.font(Font.body.bold())
+                                
+                                ScrollView(.horizontal){
+                                    LazyHStack{
+                                        ForEach(getUnitImages(unit: unit), id: \.id){ img in
+                                            HStack{
+                                                Spacer()
+                                                VStack{
+                                                    Text("Page: " + String(img.pageNo!)).font(.system(size: 11))
+                                                    Image(uiImage: img.image).resizable().scaledToFit().onTapGesture {
+                                                        withAnimation{
+                                                            expandedImg = img
+                                                        }
+                                                    }.cornerRadius(10.0).frame(maxHeight: 100)
+                                                }.padding(5).overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(.yellow, lineWidth: 0.5))
+                                                Spacer()
+                                            }
+                                        }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
+                                    }
+                                }
+                            }.frame(minHeight: 150).alignmentGuide(.listRowSeparatorTrailing) { d in
+                                d[.trailing]
+                            }
+                        }else{
                             HStack{
                                 Text(unit.title!)
                                 Spacer()
                                 Text(String(getImageCount(unit: unit)))
-                            }.padding([.top,.bottom]).contentShape(Rectangle()).onTapGesture {
-                                expandedUnit = nil
-                            }.font(Font.body.bold())
-                            
-                            ScrollView(.horizontal){
-                                LazyHStack{
-                                    ForEach(getUnitImages(unit: unit), id: \.id){ img in
-                                        HStack{
-                                            Spacer()
-                                            VStack{
-                                                Text("Page: " + String(img.pageNo!)).font(.system(size: 11))
-                                                Image(uiImage: img.image).resizable().scaledToFit().onTapGesture {
-                                                    expandedImg = img
-                                                }.cornerRadius(10.0).frame(maxHeight: 100)
-                                            }.padding(5).overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(.yellow, lineWidth: 0.5))
-                                            Spacer()
-                                        }
-                                    }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
+                            }.padding(5).contentShape(Rectangle()).onTapGesture {
+                                if getImageCount(unit: unit) > 0{
+                                    withAnimation{
+                                        expandedUnit = unit
+                                    }
                                 }
+                            }.alignmentGuide(.listRowSeparatorTrailing) { d in
+                                d[.trailing]
                             }
-                        }.frame(minHeight: 150).alignmentGuide(.listRowSeparatorTrailing) { d in
-                            d[.trailing]
                         }
-                    }else{
-                        HStack{
-                            Text(unit.title!)
-                            Spacer()
-                            Text(String(getImageCount(unit: unit)))
-                        }.padding(5).contentShape(Rectangle()).onTapGesture {
-                            if getImageCount(unit: unit) > 0{
-                                expandedUnit = unit
-                            }
-                        }.alignmentGuide(.listRowSeparatorTrailing) { d in
-                            d[.trailing]
-                        }
-                    }
-                }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
+                    }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
+                }
             }
-        }
+        }.transition(.scale)
     }
     
     
@@ -112,8 +122,10 @@ struct PageImagesView: View {
                     book.updateDate = Date()
                     viewContext.delete(delImg!)
                     try viewContext.save()
-                    expandedImg = nil
-                    expandedUnit = nil
+                    withAnimation{
+                        expandedImg = nil
+                        expandedUnit = nil
+                    }
                     presentConfirmDelete.toggle()
                 } catch {
                     let nsError = error as NSError

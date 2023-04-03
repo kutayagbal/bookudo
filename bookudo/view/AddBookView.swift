@@ -143,7 +143,7 @@ struct AddBookView: View {
                     }.padding(.top, 3)
                     Spacer()
                 }
-            }.padding([.leading,.trailing], 25)
+            }.transition(.scale).padding([.leading,.trailing], 25)
                 .sheet(isPresented: $presentImagePicker){
                     ImagePicker(images: self.$images)
             }
@@ -173,7 +173,9 @@ struct AddBookView: View {
     }
     
     private func removeCoverImage(){
-        images = []
+        withAnimation {
+            images = []
+        }
     }
     
     private func saveBook(){
