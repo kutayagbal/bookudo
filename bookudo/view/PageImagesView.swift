@@ -23,7 +23,7 @@ struct PageImagesView: View {
                     if book.subTitle != nil{
                         Text(book.subTitle!).font(.caption).padding(2)
                     }
-                }.padding(.top, 40)
+                }.multilineTextAlignment(.center).padding(.top, 40)
                 
                 HStack{
                     Text("Page: " + String(expandedImg!.pageNo!)).font(.title3).padding()
@@ -54,7 +54,7 @@ struct PageImagesView: View {
                         if book.subTitle != nil{
                             Text(book.subTitle!).font(.caption).padding(2)
                         }
-                    }.padding(.top, 40)
+                    }.multilineTextAlignment(.center).padding(.top, 40)
                     List(book.units?.array as! [Unit], id: \.id) { unit in
                         if expandedUnit == unit{
                             VStack{

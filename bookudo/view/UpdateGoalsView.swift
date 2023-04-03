@@ -27,7 +27,7 @@ struct UpdateGoalsView: View {
                     if book.subTitle != nil{
                         Text(book.subTitle!).font(.caption).padding(2)
                     }
-                }
+                }.multilineTextAlignment(.center)
                 Spacer()
                 
                 HStack{

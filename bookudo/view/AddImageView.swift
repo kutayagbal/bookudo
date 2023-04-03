@@ -23,7 +23,7 @@ struct AddImageView: View {
                         if book.subTitle != nil{
                             Text(book.subTitle!).font(.caption).padding(2)
                         }
-                    }.padding(.top, 40)
+                    }.multilineTextAlignment(.center).padding(.top, 40)
                     Spacer()
                     HStack{
                         ForEach(images, id: \.id) { img in

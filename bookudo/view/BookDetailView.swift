@@ -44,7 +44,7 @@ struct BookDetailView: View {
                     if book.subTitle != nil{
                         Text(book.subTitle!).font(.system(size: 16))
                     }
-                }
+                }.multilineTextAlignment(.center)
                 
                 Divider().padding([.bottom, .leading, .trailing])
                 HStack{

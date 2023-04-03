@@ -19,9 +19,9 @@ struct BookSummaryListItemView: View {
         
         VStack{
             if book.title != nil{
-                Text(book.title!).font(Font.headline)
+                Text(book.title!).font(Font.headline).multilineTextAlignment(.center)
                 if book.subTitle != nil{
-                    Text(book.subTitle!).font(Font.subheadline)
+                    Text(book.subTitle!).font(Font.subheadline).multilineTextAlignment(.center)
                 }
                 
                 Divider().frame(minHeight: 1)
