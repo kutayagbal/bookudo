@@ -14,6 +14,8 @@ struct AddImageView: View {
     @State var imagePage = ""
     @State var presentImagePicker: Bool = false
     @State var images = [HashableImage]()
+    @State var showMessage = false
+    @State var message = ""
     
     var body: some View {
         VStack{
@@ -72,7 +74,7 @@ struct AddImageView: View {
             
         }.padding().sheet(isPresented: $presentImagePicker){
             ImagePicker(images: self.$images)
-        }
+        }.alert(message, isPresented: $showMessage) {}
     }
     
     private func showImagePicker(){
@@ -80,26 +82,39 @@ struct AddImageView: View {
     }
     
     private func saveImages(){
-        if !imagePage.isEmpty && !images.isEmpty{
-            var page = Double(imagePage) ?? nil
-            
-            if page != nil{
-                book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
-                    let pageImg = PageImage(context: viewContext)
-                    pageImg.pageNo = page!
-                    pageImg.data = element.image.jpegData(compressionQuality: 0.8)
-                    page! += 1
-                    return pageImg
-                }) as! Set<AnyHashable>)) as NSSet?
-                do {
-                    book.updateDate = Date()
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-                self.presentAddImageView.toggle()
+        if images.isEmpty{
+            message = "Tap to Plus button to add an image"
+            showMessage.toggle()
+            return
+        }else if imagePage.isEmpty{
+            message = "Fill in 'Page No'"
+            showMessage.toggle()
+            return
+        }
+        
+        var page = Double(imagePage) ?? nil
+        
+        if page != nil{
+            book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
+                let pageImg = PageImage(context: viewContext)
+                pageImg.pageNo = page!
+                pageImg.data = element.image.jpegData(compressionQuality: 0.8)
+                page! += 1
+                return pageImg
+            }) as! Set<AnyHashable>)) as NSSet?
+            do {
+                book.updateDate = Date()
+                try viewContext.save()
+            } catch {
+                message = (error as NSError).localizedDescription
+                showMessage.toggle()
+                return
             }
+            self.presentAddImageView.toggle()
+        }else{
+            message = "'Page No' should be a number"
+            showMessage.toggle()
+            return
         }
     }
 }

@@ -14,7 +14,9 @@ struct PageImagesView: View {
     @State private var expandedUnit: Unit?
     @State var presentConfirmDelete = false
     @State private var expandedImg: HashableImage?
-
+    @State var showMessage = false
+    @State var message = ""
+    
     var body: some View {
         VStack{
             if expandedImg != nil{
@@ -112,7 +114,7 @@ struct PageImagesView: View {
                     }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
                 }
             }
-        }.transition(.scale)
+        }.transition(.scale).alert(message, isPresented: $showMessage) {}
     }
     
     
@@ -131,8 +133,9 @@ struct PageImagesView: View {
                     }
                     presentConfirmDelete.toggle()
                 } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                    message = (error as NSError).localizedDescription
+                    showMessage.toggle()
+                    return
                 }
             }
         }

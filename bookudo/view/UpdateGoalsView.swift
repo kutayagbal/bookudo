@@ -13,6 +13,8 @@ struct UpdateGoalsView: View {
     @State var weekendGoalStr: String = ""
     @State var book: Book
     @Binding var presentUpdateGoalsView: Bool
+    @State var showMessage = false
+    @State var message = ""
     
     var body: some View {
         
@@ -71,7 +73,7 @@ struct UpdateGoalsView: View {
                 )
                 Spacer()
             }.padding()
-        }.padding()
+        }.padding().alert(message, isPresented: $showMessage) {}
     }
     
     private func getWeekdayGoal() -> Double{
@@ -103,8 +105,9 @@ struct UpdateGoalsView: View {
             book.updateDate = Date()
             try viewContext.save()
         } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            message = (error as NSError).localizedDescription
+            showMessage.toggle()
+            return
         }
     }
     

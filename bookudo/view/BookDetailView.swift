@@ -29,98 +29,100 @@ struct BookDetailView: View {
     @State var weeklySpeedGoalChartData: [ChartData] = []
     @State var monthlySpeedChartData: [ChartData] = []
     @State var monthlySpeedGoalChartData: [ChartData] = []
+    @State var showMessage = false
+    @State var message = ""
     
     var body: some View {
         ScrollView{
-        VStack{
             VStack{
-                if book.cover != nil{
+                VStack{
+                    if book.cover != nil{
+                        VStack{
+                            Image(uiImage: UIImage(data: book.cover!)!).resizable().scaledToFit().cornerRadius(3.0).frame(maxWidth: 150)
+                        }.opacity(0.8)
+                    }
+
                     VStack{
-                        Image(uiImage: UIImage(data: book.cover!)!).resizable().scaledToFit().cornerRadius(3.0).frame(maxWidth: 150)
-                    }.opacity(0.8)
-                }
-
-                VStack{
-                    Text(book.title ?? "").font(.system(size: 23)).padding(.top,3)
-                    if book.subTitle != nil{
-                        Text(book.subTitle!).font(.system(size: 16))
-                    }
-                }.multilineTextAlignment(.center)
-                
-                Divider().padding([.bottom, .leading, .trailing])
-                HStack{
-                    Button(action: openAddImageView) {
-                        Image(systemName: "plus").font(Font.title2)
-                    }.padding(16).overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(.blue, lineWidth: 1))
+                        Text(book.title ?? "").font(.system(size: 23)).padding(.top,3)
+                        if book.subTitle != nil{
+                            Text(book.subTitle!).font(.system(size: 16))
+                        }
+                    }.multilineTextAlignment(.center)
                     
+                    Divider().padding([.bottom, .leading, .trailing])
+                    HStack{
+                        Button(action: openAddImageView) {
+                            Image(systemName: "plus").font(Font.title2)
+                        }.padding(16).overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.blue, lineWidth: 1))
+                        
 
-                    Spacer()
-                    Button("Images") {
-                        presentPageImagesView.toggle()
-                            }.foregroundColor(.blue).cornerRadius(10).padding().overlay(
+                        Spacer()
+                        Button("Images") {
+                            presentPageImagesView.toggle()
+                                }.foregroundColor(.blue).cornerRadius(10).padding().overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.blue, lineWidth: 1)
+                            )
+                        Spacer()
+                        Button("Goals") {
+                            presentUpdateGoalsView.toggle()
+                                }.foregroundColor(.green).cornerRadius(10).padding()
+                            .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.blue, lineWidth: 1)
+                                    .stroke(.green, lineWidth: 1)
                         )
-                    Spacer()
-                    Button("Goals") {
-                        presentUpdateGoalsView.toggle()
-                            }.foregroundColor(.green).cornerRadius(10).padding()
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.green, lineWidth: 1)
-                    )
-                    Spacer()
-                    Button("Progress") {
-                        presentUpdateBookStatusView.toggle()
-                            }.foregroundColor(.green).cornerRadius(10).padding()
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.green, lineWidth: 1)
-                    )
-                    
-                }.padding([.leading, .trailing], 30)
-            }
-            Spacer()
-                VStack{
-                    Picker("", selection: $chartType) {
-                        ForEach(ChartType.allCases, id: \.self) {
-                            Text($0.rawValue)
-                                    }
-                    }.font(.caption)
-                    if chartType == .WEEKLY{
-                        VStack{
-                            ProgressGoalChartView(showPoints: true, chartName: "Progress", chartData: weeklyChartData, goalData: weeklyGoalChartData, xAxisScale: weeklyChartXScale)
-                            ProgressGoalChartView(showPoints: true, chartName: "Speed", chartData: weeklySpeedChartData, goalData: weeklySpeedGoalChartData, xAxisScale: weeklyChartXScale)
-                        }.frame(minHeight: 500)
-                    }else if chartType == .MONTHLY{
-                        VStack{
-                            ProgressGoalChartView(showPoints: false, chartName: "Progress", chartData: monthlyChartData, goalData: monthlyGoalChartData, xAxisScale: nil)
-                            ProgressGoalChartView(showPoints: false, chartName: "Speed", chartData: monthlySpeedChartData, goalData: monthlySpeedGoalChartData, xAxisScale: nil)
-                        }.frame(minHeight: 500)
+                        Spacer()
+                        Button("Progress") {
+                            presentUpdateBookStatusView.toggle()
+                                }.foregroundColor(.green).cornerRadius(10).padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.green, lineWidth: 1)
+                        )
+                        
+                    }.padding([.leading, .trailing], 30)
+                }
+                Spacer()
+                    VStack{
+                        Picker("", selection: $chartType) {
+                            ForEach(ChartType.allCases, id: \.self) {
+                                Text($0.rawValue)
+                                        }
+                        }.font(.caption)
+                        if chartType == .WEEKLY{
+                            VStack{
+                                ProgressGoalChartView(showPoints: true, chartName: "Progress", chartData: weeklyChartData, goalData: weeklyGoalChartData, xAxisScale: weeklyChartXScale)
+                                ProgressGoalChartView(showPoints: true, chartName: "Speed", chartData: weeklySpeedChartData, goalData: weeklySpeedGoalChartData, xAxisScale: weeklyChartXScale)
+                            }.frame(minHeight: 500)
+                        }else if chartType == .MONTHLY{
+                            VStack{
+                                ProgressGoalChartView(showPoints: false, chartName: "Progress", chartData: monthlyChartData, goalData: monthlyGoalChartData, xAxisScale: nil)
+                                ProgressGoalChartView(showPoints: false, chartName: "Speed", chartData: monthlySpeedChartData, goalData: monthlySpeedGoalChartData, xAxisScale: nil)
+                            }.frame(minHeight: 500)
+                        }
+                    }.padding()
+            }.toolbar {
+                ToolbarItem {
+                    Button(action: presentConfirmation) {
+                        Label("Delete Book", systemImage: "minus").foregroundColor(.red).font(Font.system(size: 25))
                     }
-                }.padding()
-        }.toolbar {
-            ToolbarItem {
-                Button(action: presentConfirmation) {
-                    Label("Delete Book", systemImage: "minus").foregroundColor(.red).font(Font.system(size: 25))
+                }
+            }.onAppear(perform:createProgressData).sheet(isPresented: $presentUpdateBookStatusView, onDismiss: onDissmiss) {
+                UpdateBookStatusView(presentUpdateBookStatusView: $presentUpdateBookStatusView, book: book)
+            }.sheet(isPresented: $presentAddImageView, onDismiss: onDissmiss) {
+                AddImageView(book: book, presentAddImageView: $presentAddImageView)
+            }.sheet(isPresented: $presentPageImagesView, onDismiss: onDissmiss) {
+                PageImagesView(book: book, presentPageImagesView: $presentPageImagesView)
+            }.sheet(isPresented: $presentUpdateGoalsView, onDismiss: onDissmiss){
+                UpdateGoalsView(book: book, presentUpdateGoalsView: $presentUpdateGoalsView)
+            }.confirmationDialog("", isPresented: $presentConfirmDelete){
+                Button("Delete book", role: .destructive) {
+                    deleteBook()
                 }
             }
-        }.onAppear(perform:createProgressData).sheet(isPresented: $presentUpdateBookStatusView, onDismiss: onDissmiss) {
-            UpdateBookStatusView(presentUpdateBookStatusView: $presentUpdateBookStatusView, book: book)
-        }.sheet(isPresented: $presentAddImageView, onDismiss: onDissmiss) {
-            AddImageView(book: book, presentAddImageView: $presentAddImageView)
-        }.sheet(isPresented: $presentPageImagesView, onDismiss: onDissmiss) {
-            PageImagesView(book: book, presentPageImagesView: $presentPageImagesView)
-        }.sheet(isPresented: $presentUpdateGoalsView, onDismiss: onDissmiss){
-            UpdateGoalsView(book: book, presentUpdateGoalsView: $presentUpdateGoalsView)
-        }.confirmationDialog("", isPresented: $presentConfirmDelete){
-            Button("Delete book", role: .destructive) {
-                deleteBook()
-            }
-        }
-    }.scrollIndicators(.hidden)
+        }.scrollIndicators(.hidden).alert(message, isPresented: $showMessage) {}
     }
     
     private func presentConfirmation(){
@@ -132,8 +134,9 @@ struct BookDetailView: View {
         do {
             try viewContext.save()
         } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            message = (error as NSError).localizedDescription
+            showMessage.toggle()
+            return
         }
         
         DispatchQueue.main.async {

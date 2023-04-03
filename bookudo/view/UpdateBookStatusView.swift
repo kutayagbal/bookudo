@@ -14,6 +14,8 @@ struct UpdateBookStatusView: View {
     @State var date = Date()
     @State var book: Book
     @State var isError: Bool = false
+    @State var showMessage = false
+    @State var message = ""
     
     var body: some View {
         VStack{
@@ -60,11 +62,17 @@ struct UpdateBookStatusView: View {
                 )
                 Spacer()
             }.padding()
-        }.padding()
+        }.padding().alert(message, isPresented: $showMessage) {}
     }
     
     private func updateHistoryAndCurrentPage(){
-        if Double(currentPageStr)! > book.totalPage{
+        if currentPageStr.isEmpty{
+            message = "Fill in 'Page'"
+            showMessage.toggle()
+            return
+        }else if Double(currentPageStr)! > book.totalPage{
+            message = "'Page' can not be bigger than total page number"
+            showMessage.toggle()
             return
         }
 
@@ -120,8 +128,9 @@ struct UpdateBookStatusView: View {
             book.updateDate = Date()
             try viewContext.save()
         } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            message = (error as NSError).localizedDescription
+            showMessage.toggle()
+            return
         }
     }
 }

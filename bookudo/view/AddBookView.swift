@@ -24,6 +24,8 @@ struct AddBookView: View {
     @State var weekendGoalStr = ""
     @State var images = [HashableImage]()
     @FocusState private var focusToUnitTitle: Bool
+    @State var showMessage = false
+    @State var message = ""
     
     var body: some View {
         VStack{
@@ -169,7 +171,7 @@ struct AddBookView: View {
             }.padding()
             
             Spacer()
-        }
+        }.alert(message, isPresented: $showMessage) {}
     }
     
     private func removeCoverImage(){
@@ -179,68 +181,101 @@ struct AddBookView: View {
     }
     
     private func saveBook(){
-        if !title.isEmpty && !totalPageStr.isEmpty && !images.isEmpty{
-            let totalPage = Double(totalPageStr) ?? 0
-            
-            if totalPage > 0{
-                let book = Book(context: viewContext)
-                book.cover = images[0].image.jpegData(compressionQuality: 0.8)
-                book.title = title
-                book.subTitle = subTitle
-                book.totalPage = totalPage
-                book.currentPage = 0
-                book.units = NSOrderedSet(array: units.sorted{
-                    $0.startPage < $1.startPage
-                })
-                
-                let weekGoal = Goal(context: viewContext)
-                weekGoal.title = "weekday"
-                weekGoal.pageCount = Double(weekGoalStr) ?? 0
-                let weekendGoal = Goal(context: viewContext)
-                weekendGoal.title = "weekend"
-                weekendGoal.pageCount = Double(weekendGoalStr) ?? 0
-                book.goals = [weekGoal, weekendGoal]
-                do {
-                    book.updateDate = Date()
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-            }
-            
-            self.presentAddBookView.toggle()
+        if images.isEmpty{
+            message = "Add a 'Cover Image'"
+            showMessage.toggle()
+            return
+        }else if title.isEmpty{
+            message = "Fill in 'Title' for book"
+            showMessage.toggle()
+            return
+        }else if totalPageStr.isEmpty{
+            message = "Fill in 'Total Page'"
+            showMessage.toggle()
+            return
         }
+        
+        let totalPage = Double(totalPageStr) ?? 0
+        
+        if totalPage > 0{
+            let book = Book(context: viewContext)
+            book.cover = images[0].image.jpegData(compressionQuality: 0.8)
+            book.title = title
+            book.subTitle = subTitle
+            book.totalPage = totalPage
+            book.currentPage = 0
+            book.units = NSOrderedSet(array: units.sorted{
+                $0.startPage < $1.startPage
+            })
+            
+            let weekGoal = Goal(context: viewContext)
+            weekGoal.title = "weekday"
+            weekGoal.pageCount = Double(weekGoalStr) ?? 0
+            let weekendGoal = Goal(context: viewContext)
+            weekendGoal.title = "weekend"
+            weekendGoal.pageCount = Double(weekendGoalStr) ?? 0
+            book.goals = [weekGoal, weekendGoal]
+            do {
+                book.updateDate = Date()
+                try viewContext.save()
+            } catch {
+                message = (error as NSError).localizedDescription
+                showMessage.toggle()
+                return
+            }
+        }else{
+            message = "'Total Page' should be a positive number"
+            showMessage.toggle()
+            return
+        }
+        
+        self.presentAddBookView.toggle()
     }
     
     private func addUnit(){
-        if !unitTitle.isEmpty && !unitStartPageStr.isEmpty && !totalPageStr.isEmpty{
-            let startPage = Double(unitStartPageStr) ?? 0
-            
-            if startPage > 0{
-                if units.isEmpty{
-                    let preface = Unit(context: viewContext)
-                    preface.title = "0. " + "Preface"
-                    preface.startPage = 0
-                    preface.endPage = startPage
-                    units.append(preface)
-                }
-                
-                let unit = Unit(context: viewContext)
-                unit.title = String(unitIndex) + ". " + unitTitle
-                unit.startPage = startPage
-                unit.endPage = Double(totalPageStr)!
-                
-                if units.count > 0{
-                    units.last?.endPage = startPage - 1
-                }
-                self.units.append(unit)
-                
-                unitIndex += 1
-                unitTitle = ""
-                unitStartPageStr = ""
-                focusToUnitTitle = true
+        if totalPageStr.isEmpty{
+            message = "Fill in 'Total Page'"
+            showMessage.toggle()
+            return
+        }else if unitTitle.isEmpty{
+            message = "Fill in 'Title' for unit"
+            showMessage.toggle()
+            return
+        }else if unitStartPageStr.isEmpty{
+            message = "Fill in 'Start Page'"
+            showMessage.toggle()
+            return
+        }
+        
+        let startPage = Double(unitStartPageStr) ?? 0
+        
+        if startPage > 0{
+            if units.isEmpty{
+                let preface = Unit(context: viewContext)
+                preface.title = "0. " + "Preface"
+                preface.startPage = 0
+                preface.endPage = startPage
+                units.append(preface)
             }
+            
+            let unit = Unit(context: viewContext)
+            unit.title = String(unitIndex) + ". " + unitTitle
+            unit.startPage = startPage
+            unit.endPage = Double(totalPageStr)!
+            
+            if units.count > 0{
+                units.last?.endPage = startPage - 1
+            }
+            self.units.append(unit)
+            
+            unitIndex += 1
+            unitTitle = ""
+            unitStartPageStr = ""
+            focusToUnitTitle = true
+        }else{
+            message = "'Start Page' should be a positive number"
+            showMessage.toggle()
+            return
         }
     }
     
