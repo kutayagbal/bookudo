@@ -31,16 +31,17 @@ struct BookDetailView: View {
     @State var monthlySpeedGoalChartData: [ChartData] = []
     
     var body: some View {
+        ScrollView{
         VStack{
             VStack{
                 if book.cover != nil{
                     VStack{
-                        Image(uiImage: UIImage(data: book.cover!)!).resizable().scaledToFit().cornerRadius(3.0).frame(maxWidth: 100)
-                    }.opacity(0.7)
+                        Image(uiImage: UIImage(data: book.cover!)!).resizable().scaledToFit().cornerRadius(3.0).frame(maxWidth: 150)
+                    }.opacity(0.8)
                 }
 
                 VStack{
-                    Text(book.title ?? "").font(.system(size: 23)).padding(3)
+                    Text(book.title ?? "").font(.system(size: 23)).padding(.top,3)
                     if book.subTitle != nil{
                         Text(book.subTitle!).font(.system(size: 16))
                     }
@@ -81,25 +82,25 @@ struct BookDetailView: View {
                     
                 }.padding([.leading, .trailing], 30)
             }
-            
-            ScrollView {
-                Picker("", selection: $chartType) {
-                    ForEach(ChartType.allCases, id: \.self) {
-                        Text($0.rawValue)
-                                }
-                }.font(.caption)
-                if chartType == .WEEKLY{
-                    VStack{
-                        ProgressGoalChartView(showPoints: true, chartName: "Progress", chartData: weeklyChartData, goalData: weeklyGoalChartData, xAxisScale: weeklyChartXScale)
-                        ProgressGoalChartView(showPoints: true, chartName: "Speed", chartData: weeklySpeedChartData, goalData: weeklySpeedGoalChartData, xAxisScale: weeklyChartXScale)
-                    }.frame(minHeight: 500)
-                }else if chartType == .MONTHLY{
-                    VStack{
-                        ProgressGoalChartView(showPoints: false, chartName: "Progress", chartData: monthlyChartData, goalData: monthlyGoalChartData, xAxisScale: nil)
-                        ProgressGoalChartView(showPoints: false, chartName: "Speed", chartData: monthlySpeedChartData, goalData: monthlySpeedGoalChartData, xAxisScale: nil)
-                    }.frame(minHeight: 500)
-                }
-            }.scrollIndicators(.hidden) .padding()
+            Spacer()
+                VStack{
+                    Picker("", selection: $chartType) {
+                        ForEach(ChartType.allCases, id: \.self) {
+                            Text($0.rawValue)
+                                    }
+                    }.font(.caption)
+                    if chartType == .WEEKLY{
+                        VStack{
+                            ProgressGoalChartView(showPoints: true, chartName: "Progress", chartData: weeklyChartData, goalData: weeklyGoalChartData, xAxisScale: weeklyChartXScale)
+                            ProgressGoalChartView(showPoints: true, chartName: "Speed", chartData: weeklySpeedChartData, goalData: weeklySpeedGoalChartData, xAxisScale: weeklyChartXScale)
+                        }.frame(minHeight: 500)
+                    }else if chartType == .MONTHLY{
+                        VStack{
+                            ProgressGoalChartView(showPoints: false, chartName: "Progress", chartData: monthlyChartData, goalData: monthlyGoalChartData, xAxisScale: nil)
+                            ProgressGoalChartView(showPoints: false, chartName: "Speed", chartData: monthlySpeedChartData, goalData: monthlySpeedGoalChartData, xAxisScale: nil)
+                        }.frame(minHeight: 500)
+                    }
+                }.padding()
         }.toolbar {
             ToolbarItem {
                 Button(action: presentConfirmation) {
@@ -119,6 +120,7 @@ struct BookDetailView: View {
                 deleteBook()
             }
         }
+    }.scrollIndicators(.hidden)
     }
     
     private func presentConfirmation(){

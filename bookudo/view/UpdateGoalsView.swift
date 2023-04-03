@@ -20,7 +20,7 @@ struct UpdateGoalsView: View {
             VStack{
                 VStack{
                     Image(uiImage: UIImage(data: book.cover!)!).resizable().scaledToFit().cornerRadius(3.0).frame(maxWidth: 200)
-                }.opacity(0.5)
+                }.opacity(0.8)
                 
                 VStack{
                     Text(book.title!).font(.title2).padding(3)

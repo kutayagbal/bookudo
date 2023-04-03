@@ -30,7 +30,7 @@ struct BookSummaryListItemView: View {
                 HStack{
                     VStack{
                         Image(uiImage: UIImage(data: book.cover!)!).resizable().scaledToFit().cornerRadius(3.0).frame(maxWidth: 135)
-                    }.opacity(0.7)
+                    }.opacity(0.8)
                     VStack{
                         HStack{
                             VStack{
