@@ -49,12 +49,15 @@ struct PageImagesView: View {
                 Spacer()
             }else{
                 VStack{
-                    VStack{
-                        Text(book.title!).font(.title2).padding(3)
-                        if book.subTitle != nil{
-                            Text(book.subTitle!).font(.caption).padding(2)
-                        }
-                    }.multilineTextAlignment(.center).padding(.top, 40)
+                    HStack{
+                        VStack{
+                            Text(book.title!).font(.title2).padding(3)
+                            if book.subTitle != nil{
+                                Text(book.subTitle!).font(.caption).padding(2)
+                            }
+                        }.multilineTextAlignment(.center).padding(.top, 40).padding([.leading, .trailing])
+                    }.padding()
+                    
                     List(book.units?.array as! [Unit], id: \.id) { unit in
                         if expandedUnit == unit{
                             VStack{
@@ -62,11 +65,11 @@ struct PageImagesView: View {
                                     Text(unit.title!)
                                     Spacer()
                                     Text(String(getImageCount(unit: unit)))
-                                }.padding([.top,.bottom]).contentShape(Rectangle()).onTapGesture {
+                                }.padding(5).padding(.top, 7).contentShape(Rectangle()).onTapGesture {
                                     withAnimation{
                                         expandedUnit = nil
                                     }
-                                }.font(Font.body.bold())
+                                }
                                 
                                 ScrollView(.horizontal){
                                     LazyHStack{
