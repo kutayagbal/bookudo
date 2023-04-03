@@ -24,8 +24,7 @@ struct BookSummaryListItemView: View {
                     Text(book.subTitle!).font(Font.subheadline).multilineTextAlignment(.center)
                 }
                 
-                Divider().frame(minHeight: 1)
-                    .background(.yellow)
+                Divider().padding([.bottom, .top], 3)
                 
                 HStack{
                     VStack{
@@ -83,10 +82,8 @@ struct BookSummaryListItemView: View {
                     }
                 }.padding([.top, .bottom], 5).padding([.leading, .trailing], 3)
             }
-        }.padding().overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.yellow, lineWidth: 2)
-        ).background(
+        }.padding()
+            .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Color(UIColor.systemGray6))
         ).onAppear(perform: setAvgSpeedGoal).padding()
     }
