@@ -85,12 +85,12 @@ struct BookDetailView: View {
                         VStack{
                             ProgressGoalChartView(showPoints: chartXScale != nil ? true : false, chartName: "Progress", chartData: chartData, goalData: goalChartData, xAxisScale: chartXScale)
                             ProgressGoalChartView(showPoints: chartXScale != nil ? true : false, chartName: "Speed", chartData: speedChartData, goalData: speedGoalChartData, xAxisScale: chartXScale)
-                        }.frame(minHeight: 500)
+                        }.padding([.leading, .trailing, .top]).frame(minHeight: 500)
                         
                         HStack{
                             Picker("", selection: $chartScaleValue) {
                                 ForEach(1 ..< 61, id: \.self) {
-                                    Text(String($0)).font(Font.headline)
+                                    Text(String($0)).font(Font.subheadline.bold())
                                 }
                             }.onChange(of: chartScaleValue) { newValue in
                                 withAnimation{
@@ -100,7 +100,7 @@ struct BookDetailView: View {
                             Spacer()
                             Picker("", selection: $chartScaleRange) {
                                 ForEach(ChartScaleRange.allCases, id: \.self) {
-                                    Text($0.rawValue).font(Font.headline)
+                                    Text($0.rawValue).font(Font.subheadline.bold())
                                 }
                             }.onChange(of: chartScaleRange) { newValue in
                                 withAnimation{
@@ -108,7 +108,7 @@ struct BookDetailView: View {
                                 }
                             }.pickerStyle(.wheel)
                         }.frame(maxWidth: 350, maxHeight: 100)
-                    }.padding()
+                    }
             }.toolbar {
                 ToolbarItem {
                     Button(action: presentConfirmation) {
