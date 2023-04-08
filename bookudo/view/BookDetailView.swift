@@ -90,7 +90,7 @@ struct BookDetailView: View {
                         HStack{
                             Picker("", selection: $chartScaleValue) {
                                 ForEach(1 ..< 61, id: \.self) {
-                                    Text(String($0))
+                                    Text(String($0)).font(Font.headline)
                                 }
                             }.onChange(of: chartScaleValue) { newValue in
                                 withAnimation{
@@ -100,14 +100,14 @@ struct BookDetailView: View {
                             Spacer()
                             Picker("", selection: $chartScaleRange) {
                                 ForEach(ChartScaleRange.allCases, id: \.self) {
-                                    Text($0.rawValue)
+                                    Text($0.rawValue).font(Font.headline)
                                 }
                             }.onChange(of: chartScaleRange) { newValue in
                                 withAnimation{
                                     updateProgressData(newScaleRange: newValue, newScaleValue: chartScaleValue)
                                 }
                             }.pickerStyle(.wheel)
-                        }.frame(maxHeight: 100)
+                        }.frame(maxWidth: 350, maxHeight: 100)
                     }.padding()
             }.toolbar {
                 ToolbarItem {
