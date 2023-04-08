@@ -13,7 +13,7 @@
 		AD7E7B0129D9E319009E12C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0029D9E319009E12C0 /* Persistence.swift */; };
 		AD7E7B0429D9E31A009E12C0 /* bookudo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B0229D9E319009E12C0 /* bookudo.xcdatamodeld */; };
 		AD7E7B3329DA1B07009E12C0 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2229DA1B06009E12C0 /* ChartData.swift */; };
-		AD7E7B3429DA1B07009E12C0 /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2329DA1B06009E12C0 /* ChartType.swift */; };
+		AD7E7B3429DA1B07009E12C0 /* ChartScaleRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2329DA1B06009E12C0 /* ChartScaleRange.swift */; };
 		AD7E7B3529DA1B07009E12C0 /* HashableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */; };
 		AD7E7B3629DA1B07009E12C0 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2629DA1B07009E12C0 /* AddBookView.swift */; };
 		AD7E7B3729DA1B07009E12C0 /* ProgressGoalChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B2729DA1B07009E12C0 /* ProgressGoalChartView.swift */; };
@@ -49,7 +49,7 @@
 		AD7E7B0029D9E319009E12C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AD7E7B0329D9E319009E12C0 /* bookudo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bookudo.xcdatamodel; sourceTree = "<group>"; };
 		AD7E7B2229DA1B06009E12C0 /* ChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
-		AD7E7B2329DA1B06009E12C0 /* ChartType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
+		AD7E7B2329DA1B06009E12C0 /* ChartScaleRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartScaleRange.swift; sourceTree = "<group>"; };
 		AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableImage.swift; sourceTree = "<group>"; };
 		AD7E7B2629DA1B07009E12C0 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		AD7E7B2729DA1B07009E12C0 /* ProgressGoalChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressGoalChartView.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				AD7E7B2229DA1B06009E12C0 /* ChartData.swift */,
-				AD7E7B2329DA1B06009E12C0 /* ChartType.swift */,
+				AD7E7B2329DA1B06009E12C0 /* ChartScaleRange.swift */,
 				AD7E7B2429DA1B06009E12C0 /* HashableImage.swift */,
 			);
 			path = model;
@@ -274,7 +274,7 @@
 				AD7E7B3929DA1B07009E12C0 /* BookDetailView.swift in Sources */,
 				AD7E7AF829D9E317009E12C0 /* bookudoApp.swift in Sources */,
 				AD7E7B0429D9E31A009E12C0 /* bookudo.xcdatamodeld in Sources */,
-				AD7E7B3429DA1B07009E12C0 /* ChartType.swift in Sources */,
+				AD7E7B3429DA1B07009E12C0 /* ChartScaleRange.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

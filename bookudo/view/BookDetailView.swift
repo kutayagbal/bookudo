@@ -17,18 +17,14 @@ struct BookDetailView: View {
     @State var presentAddImageView = false
     @State var presentPageImagesView = false
     @State var presentUpdateGoalsView = false
-    @State var chartType: ChartType = .WEEKLY
+    @State var chartScaleValue: Int = 1
+    @State var chartScaleRange: ChartScaleRange = .WEEK
     @State var refresh = false
-    @State var weeklyChartData: [ChartData] = []
-    @State var monthlyChartData: [ChartData] = []
-    @State var weeklyChartXScale: [Date] = []
-    @State var monthlyChartXScale: [Date] = []
-    @State var weeklyGoalChartData: [ChartData] = []
-    @State var monthlyGoalChartData: [ChartData] = []
-    @State var weeklySpeedChartData: [ChartData] = []
-    @State var weeklySpeedGoalChartData: [ChartData] = []
-    @State var monthlySpeedChartData: [ChartData] = []
-    @State var monthlySpeedGoalChartData: [ChartData] = []
+    @State var chartData: [ChartData] = []
+    @State var chartXScale: [Date]? = []
+    @State var goalChartData: [ChartData] = []
+    @State var speedChartData: [ChartData] = []
+    @State var speedGoalChartData: [ChartData] = []
     @State var showMessage = false
     @State var message = ""
     
@@ -86,22 +82,32 @@ struct BookDetailView: View {
                 }
                 Spacer()
                     VStack{
-                        Picker("", selection: $chartType) {
-                            ForEach(ChartType.allCases, id: \.self) {
-                                Text($0.rawValue)
-                                        }
-                        }.font(.caption)
-                        if chartType == .WEEKLY{
-                            VStack{
-                                ProgressGoalChartView(showPoints: true, chartName: "Progress", chartData: weeklyChartData, goalData: weeklyGoalChartData, xAxisScale: weeklyChartXScale)
-                                ProgressGoalChartView(showPoints: true, chartName: "Speed", chartData: weeklySpeedChartData, goalData: weeklySpeedGoalChartData, xAxisScale: weeklyChartXScale)
-                            }.frame(minHeight: 500)
-                        }else if chartType == .MONTHLY{
-                            VStack{
-                                ProgressGoalChartView(showPoints: false, chartName: "Progress", chartData: monthlyChartData, goalData: monthlyGoalChartData, xAxisScale: nil)
-                                ProgressGoalChartView(showPoints: false, chartName: "Speed", chartData: monthlySpeedChartData, goalData: monthlySpeedGoalChartData, xAxisScale: nil)
-                            }.frame(minHeight: 500)
-                        }
+                        VStack{
+                            ProgressGoalChartView(showPoints: chartXScale != nil ? true : false, chartName: "Progress", chartData: chartData, goalData: goalChartData, xAxisScale: chartXScale)
+                            ProgressGoalChartView(showPoints: chartXScale != nil ? true : false, chartName: "Speed", chartData: speedChartData, goalData: speedGoalChartData, xAxisScale: chartXScale)
+                        }.frame(minHeight: 500)
+                        
+                        HStack{
+                            Picker("", selection: $chartScaleValue) {
+                                ForEach(1 ..< 61, id: \.self) {
+                                    Text(String($0))
+                                }
+                            }.onChange(of: chartScaleValue) { newValue in
+                                withAnimation{
+                                    updateProgressData(newScaleRange: chartScaleRange, newScaleValue: newValue)
+                                }
+                            }.pickerStyle(.wheel)
+                            Spacer()
+                            Picker("", selection: $chartScaleRange) {
+                                ForEach(ChartScaleRange.allCases, id: \.self) {
+                                    Text($0.rawValue)
+                                }
+                            }.onChange(of: chartScaleRange) { newValue in
+                                withAnimation{
+                                    updateProgressData(newScaleRange: newValue, newScaleValue: chartScaleValue)
+                                }
+                            }.pickerStyle(.wheel)
+                        }.frame(maxHeight: 100)
                     }.padding()
             }.toolbar {
                 ToolbarItem {
@@ -148,6 +154,31 @@ struct BookDetailView: View {
         presentAddImageView.toggle()
     }
     
+    private func updateProgressData(newScaleRange: ChartScaleRange, newScaleValue: Int){
+        var length = 0
+        if newScaleRange == .MONTH{
+            length = 30 * newScaleValue
+        }else if newScaleRange == .WEEK{
+            length = 7 * newScaleValue
+        }
+        
+        self.createChartData(length: length)
+        self.createGoalChartData(length: length)
+        
+        if length <= 15{
+            chartXScale = self.createXScale()
+        }else{
+            chartXScale = nil
+        }
+        
+        speedChartData = self.createSpeedChartData(length: length, chartData: chartData)
+        speedGoalChartData = self.createSpeedGoalChartData(length: length, chartData: goalChartData)
+        
+        if length <= 15{
+            setChartAnnotationPositions()
+        }
+    }
+    
     private func createProgressData(){
         print("HISTORY:")
         for his in book.history!.array{
@@ -155,61 +186,72 @@ struct BookDetailView: View {
             print(history.date!.formatted() + " -> " +  String(history.pageNo))
         }
 
-        self.createChartData(length: 7)
-        self.createGoalChartData(length: 7)
-        weeklyChartXScale = self.createXScale()
-        weeklySpeedChartData = self.createSpeedChartData(length: 7, chartData: weeklyChartData)
-        weeklySpeedGoalChartData = self.createSpeedGoalChartData(length: 7, chartData: weeklyGoalChartData)
-        setWeeklyChartAnnotationPositions()
+        var length = 0
+        if chartScaleRange == .MONTH{
+            length = 30 * chartScaleValue
+        }else if chartScaleRange == .WEEK{
+            length = 7 * chartScaleValue
+        }
         
-        self.createChartData(length: 30)
-        self.createGoalChartData(length: 30)
-        monthlySpeedChartData = self.createSpeedChartData(length: 30, chartData: monthlyChartData)
-        monthlySpeedGoalChartData = self.createSpeedGoalChartData(length: 30, chartData: monthlyGoalChartData)
+        self.createChartData(length: length)
+        self.createGoalChartData(length: length)
+        
+        if length <= 15{
+            chartXScale = self.createXScale()
+        }else{
+            chartXScale = nil
+        }
+        
+        speedChartData = self.createSpeedChartData(length: length, chartData: chartData)
+        speedGoalChartData = self.createSpeedGoalChartData(length: length, chartData: goalChartData)
+        
+        if length <= 15{
+            setChartAnnotationPositions()
+        }
     }
     
-    private func setWeeklyChartAnnotationPositions(){
-        for i in 0..<weeklyGoalChartData.count{
+    private func setChartAnnotationPositions(){
+        for i in 0..<goalChartData.count{
             var foundIndex = -1
-            for j in 0..<weeklyChartData.count{
-                if Calendar.current.compare(weeklyGoalChartData[i].date!, to: weeklyChartData[j].date!, toGranularity: .day) == .orderedSame{
+            for j in 0..<chartData.count{
+                if Calendar.current.compare(goalChartData[i].date!, to: chartData[j].date!, toGranularity: .day) == .orderedSame{
                     foundIndex = j
                     break
                 }
             }
             
             if foundIndex >= 0{
-                if weeklyGoalChartData[i].pageNo! > weeklyChartData[foundIndex].pageNo!{
-                    weeklyGoalChartData[i].position = .top
-                    weeklyChartData[foundIndex].position = .bottom
+                if goalChartData[i].pageNo! > chartData[foundIndex].pageNo!{
+                    goalChartData[i].position = .top
+                    chartData[foundIndex].position = .bottom
                 }else{
-                    weeklyGoalChartData[i].position = .bottom
-                    weeklyChartData[foundIndex].position = .top
+                    goalChartData[i].position = .bottom
+                    chartData[foundIndex].position = .top
                 }
             }else{
-                weeklyGoalChartData[i].position = .bottom
+                goalChartData[i].position = .bottom
             }
         }
         
-        for i in 0..<weeklySpeedGoalChartData.count{
+        for i in 0..<speedGoalChartData.count{
             var foundIndex = -1
-            for j in 0..<weeklySpeedChartData.count{
-                if Calendar.current.compare(weeklySpeedGoalChartData[i].date!, to: weeklySpeedChartData[j].date!, toGranularity: .day) == .orderedSame{
+            for j in 0..<speedChartData.count{
+                if Calendar.current.compare(speedGoalChartData[i].date!, to: speedChartData[j].date!, toGranularity: .day) == .orderedSame{
                     foundIndex = j
                     break
                 }
             }
             
             if foundIndex >= 0{
-                if weeklySpeedGoalChartData[i].pageNo! > weeklySpeedChartData[foundIndex].pageNo!{
-                    weeklySpeedGoalChartData[i].position = .top
-                    weeklySpeedChartData[foundIndex].position = .bottom
+                if speedGoalChartData[i].pageNo! > speedChartData[foundIndex].pageNo!{
+                    speedGoalChartData[i].position = .top
+                    speedChartData[foundIndex].position = .bottom
                 }else{
-                    weeklySpeedGoalChartData[i].position = .bottom
-                    weeklySpeedChartData[foundIndex].position = .top
+                    speedGoalChartData[i].position = .bottom
+                    speedChartData[foundIndex].position = .top
                 }
             }else{
-                weeklySpeedGoalChartData[i].position = .bottom
+                speedGoalChartData[i].position = .bottom
             }
         }
     }
@@ -278,11 +320,7 @@ struct BookDetailView: View {
         
     private func createChartData(length: Int){
         if book.history == nil || book.history!.count == 0{
-            if length == 7{
-                weeklyChartData = []
-            }else{
-                monthlyChartData = []
-            }
+            chartData = []
             return
         }
         
@@ -291,7 +329,7 @@ struct BookDetailView: View {
 
         let startDateOfChart = Calendar.current.date(byAdding: .day, value: -length, to: today)!
         
-        var chartData = book.history!.filter{
+        var chart = book.history!.filter{
             let elem = $0 as! History
             let comparisonResult = Calendar.current.compare(elem.date!, to: startDateOfChart, toGranularity: .day)
             if comparisonResult == ComparisonResult.orderedSame || comparisonResult == ComparisonResult.orderedDescending{
@@ -303,17 +341,13 @@ struct BookDetailView: View {
             return ChartData(id: index, date: elem.date!, pageNo: elem.pageNo)
         }
         
-        if chartData.count == 0{
-            if length == 7{
-                weeklyChartData = []
-            }else{
-                monthlyChartData = []
-            }
+        if chart.count == 0{
+            chartData = []
             return
         }
         
-        chartData = ChartService.fillNoNConsequtive(chart: chartData)
-        chartData = ChartService.fillChart(chart: chartData, isPrefix: false, value: chartData.last!.pageNo!, date: yesterday)
+        chart = ChartService.fillNoNConsequtive(chart: chart)
+        chart = ChartService.fillChart(chart: chart, isPrefix: false, value: chart.last!.pageNo!, date: yesterday)
 
         let prevHistory = book.history!.filter{
             let elem = $0 as! History
@@ -325,18 +359,12 @@ struct BookDetailView: View {
         }
         
         if prevHistory.count > 0{
-            chartData = ChartService.fillChart(chart: chartData, isPrefix: true, value: (prevHistory.last as! History).pageNo, date: startDateOfChart)
+            chart = ChartService.fillChart(chart: chart, isPrefix: true, value: (prevHistory.last as! History).pageNo, date: startDateOfChart)
         }else{
-            chartData.insert(ChartData(id: chartData.count, date: Calendar.current.date(byAdding: .day, value: -1, to: chartData.first!.date!)! , pageNo: 0.0), at: 0)
-//            chartData = ChartService.fillChart(chart: chartData, isPrefix: true, value: 0.0, date: startDateOfChart)
+            chart.insert(ChartData(id: chart.count, date: Calendar.current.date(byAdding: .day, value: -1, to: chart.first!.date!)! , pageNo: 0.0), at: 0)
         }
         
-        
-        if length == 7{
-            weeklyChartData = chartData
-        }else{
-            monthlyChartData = chartData
-        }
+        chartData = chart
     }
     
     private func createGoalChartData(length: Int){
@@ -362,28 +390,20 @@ struct BookDetailView: View {
         if chartData.isEmpty{
             let endDateOfChart = Calendar.current.date(byAdding: .day, value: length, to: Calendar.current.startOfDay(for: Date()))!
             
-            if length == 7{
-                weeklyGoalChartData = ChartService.fillChartWithGoals(pivot: nil, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: Calendar.current.startOfDay(for: Date()), end: endDateOfChart, totalPage: book.totalPage)
-            }else{
-                monthlyGoalChartData = ChartService.fillChartWithGoals(pivot: nil, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: Calendar.current.startOfDay(for: Date()), end: endDateOfChart, totalPage: book.totalPage)
-            }
+            goalChartData = ChartService.fillChartWithGoals(pivot: nil, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: Calendar.current.startOfDay(for: Date()), end: endDateOfChart, totalPage: book.totalPage)
         }else{
             dataResult = ChartService.fillChartWithGoals(pivot: chartData.first, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: startDateOfChart, end: Calendar.current.startOfDay(for: Date()), totalPage: book.totalPage)
             
-            if length == 7{
-                weeklyGoalChartData = dataResult
-            }else{
-                monthlyGoalChartData = dataResult
-            }
+            goalChartData = dataResult
         }
     }
     
     private func createXScale() -> [Date]{
         var scaleResult:[Date] = []
-        let chartStartDate = weeklyChartData.first?.date
-        let goalStartDate = weeklyGoalChartData.first?.date
-        let chartEndDate = weeklyChartData.last?.date
-        let goalEndDate = weeklyGoalChartData.last?.date
+        let chartStartDate = chartData.first?.date
+        let goalStartDate = goalChartData.first?.date
+        let chartEndDate = chartData.last?.date
+        let goalEndDate = goalChartData.last?.date
         var currDate = Date()
         var endDate = Date()
         if chartStartDate != nil{

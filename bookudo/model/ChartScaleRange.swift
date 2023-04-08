@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum ChartType: String, CaseIterable{
-    case WEEKLY, MONTHLY
+enum ChartScaleRange: String, CaseIterable{
+    case WEEK, MONTH
 }
