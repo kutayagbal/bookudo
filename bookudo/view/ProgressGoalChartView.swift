@@ -68,7 +68,7 @@ struct ProgressGoalChartView: View {
                             )
                         }
                     }
-                }.padding()
+                }.padding(7)
             }else{
                 Chart(){
                     ForEach(goalData) { goal in
@@ -103,7 +103,7 @@ struct ProgressGoalChartView: View {
                             )
                         }
                     }
-                }.padding()
+                }.padding(7)
             }
         }
     }
