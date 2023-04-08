@@ -28,18 +28,29 @@ struct AddImageView: View {
                     }.multilineTextAlignment(.center).padding(.top, 40)
                     Spacer()
                     HStack{
-                        ForEach(images, id: \.id) { img in
-                            Image(uiImage: img.image)
-                                .resizable()
-                                .scaledToFit()
+                        if images.isEmpty{
+                            Spacer()
+                            Button("Add Image"){
+                                showImagePicker()
+                            }.padding().overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.blue, lineWidth: 1))
+                            Spacer()
+                        }else{
+                            ForEach(images, id: \.id) { img in
+                                Image(uiImage: img.image)
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                            
+                            Spacer()
+                            Button(action: showImagePicker) {
+                                Image(systemName: "plus").font(Font.title2)
+                            }.padding(7).overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.blue, lineWidth: 1))
                         }
                         
-                        Spacer()
-                        Button(action: showImagePicker) {
-                            Image(systemName: "plus").font(Font.title2)
-                        }.padding(7).overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.blue, lineWidth: 1))
                     }
                     Spacer()
                     HStack{
