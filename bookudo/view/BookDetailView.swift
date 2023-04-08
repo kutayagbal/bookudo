@@ -180,12 +180,6 @@ struct BookDetailView: View {
     }
     
     private func createProgressData(){
-        print("HISTORY:")
-        for his in book.history!.array{
-            let history = his as! History
-            print(history.date!.formatted() + " -> " +  String(history.pageNo))
-        }
-
         var length = 0
         if chartScaleRange == .MONTH{
             length = 30 * chartScaleValue
