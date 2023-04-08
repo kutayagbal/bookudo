@@ -33,7 +33,7 @@ struct ProgressGoalChartView: View {
                         ).foregroundStyle(.red)
                             .annotation(position: goal.position ?? .bottom){
                                 Text(String(format: "%.1f", goal.pageNo!)).foregroundColor(.red).font(.system(size: 10))
-                        }
+                            }.foregroundStyle(by: .value("ChartType", "Goal"))
                     }
                     
                     ForEach(chartData) { data in
@@ -49,9 +49,10 @@ struct ProgressGoalChartView: View {
                         ).foregroundStyle(.blue)
                             .annotation(position: data.position ?? .top){
                                 Text(String(format: "%.1f", data.pageNo!)).foregroundColor(.blue).font(.system(size: 10))
-                            }
+                            }.foregroundStyle(by: .value("ChartType", "Progress"))
                     }
-                }.chartXAxis {
+                }.chartForegroundStyleScale(["Goal": .red, "Progress": .blue])
+                    .chartXAxis {
                     if xAxisScale != nil{
                         AxisMarks(values: xAxisScale!) { _ in
                             AxisGridLine()
@@ -75,7 +76,7 @@ struct ProgressGoalChartView: View {
                             x: .value("Date", goal.date!),
                             y: .value("PageNo", goal.pageNo!),
                             series: .value("Data", "Goal")
-                        ).foregroundStyle(.red)
+                        ).foregroundStyle(.red).foregroundStyle(by: .value("ChartType", "Goal"))
                     }
                     
                     ForEach(chartData) { data in
@@ -83,9 +84,10 @@ struct ProgressGoalChartView: View {
                             x: .value("Date", data.date!),
                             y: .value("PageNo", data.pageNo!),
                             series: .value("Data", "Weekly")
-                        ).foregroundStyle(.blue)
+                        ).foregroundStyle(.blue).foregroundStyle(by: .value("ChartType", "Progress"))
                     }
-                }.chartXAxis {
+                }.chartForegroundStyleScale(["Goal": .red, "Progress": .blue])
+                    .chartXAxis {
                     if xAxisScale != nil{
                         AxisMarks(values: xAxisScale!) { _ in
                             AxisGridLine()

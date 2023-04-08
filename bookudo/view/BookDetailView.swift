@@ -149,6 +149,7 @@ struct BookDetailView: View {
     }
     
     private func createProgressData(){
+        print("HISTORY:")
         for his in book.history!.array{
             let history = his as! History
             print(history.date!.formatted() + " -> " +  String(history.pageNo))
@@ -360,14 +361,14 @@ struct BookDetailView: View {
         
         if chartData.isEmpty{
             let endDateOfChart = Calendar.current.date(byAdding: .day, value: length, to: Calendar.current.startOfDay(for: Date()))!
+            
             if length == 7{
-                weeklyGoalChartData = ChartService.fillChartWithGoals(chart: chartData, isPrefix: false, week: weekGoal, weekend: weekendGoal, date: endDateOfChart, totalPage: book.totalPage)
+                weeklyGoalChartData = ChartService.fillChartWithGoals(pivot: nil, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: Calendar.current.startOfDay(for: Date()), end: endDateOfChart, totalPage: book.totalPage)
             }else{
-                monthlyGoalChartData = ChartService.fillChartWithGoals(chart: chartData, isPrefix: false, week: weekGoal, weekend: weekendGoal, date: endDateOfChart, totalPage: book.totalPage)
+                monthlyGoalChartData = ChartService.fillChartWithGoals(pivot: nil, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: Calendar.current.startOfDay(for: Date()), end: endDateOfChart, totalPage: book.totalPage)
             }
         }else{
-            dataResult = ChartService.fillChartWithGoals(chart: chartData, isPrefix: true, week: weekGoal, weekend: weekendGoal, date: startDateOfChart, totalPage: book.totalPage)
-            dataResult = ChartService.fillChartWithGoals(chart: dataResult, isPrefix: false, week: weekGoal, weekend: weekendGoal, date: Calendar.current.startOfDay(for: Date()), totalPage: book.totalPage)
+            dataResult = ChartService.fillChartWithGoals(pivot: chartData.first, startPage: book.currentPage, week: weekGoal, weekend: weekendGoal, start: startDateOfChart, end: Calendar.current.startOfDay(for: Date()), totalPage: book.totalPage)
             
             if length == 7{
                 weeklyGoalChartData = dataResult
