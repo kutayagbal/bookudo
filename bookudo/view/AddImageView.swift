@@ -86,10 +86,6 @@ struct AddImageView: View {
             message = "Tap to Plus button to add an image"
             showMessage.toggle()
             return
-        }else if imagePage.isEmpty{
-            message = "Fill in 'Page No'"
-            showMessage.toggle()
-            return
         }
         
         var page = Double(imagePage) ?? nil

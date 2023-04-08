@@ -10,7 +10,7 @@ import SwiftUI
 struct UpdateBookStatusView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Binding var presentUpdateBookStatusView: Bool
-    @State var currentPageStr = ""
+    @State var pageStr = ""
     @State var date = Date()
     @State var book: Book
     @State var isError: Bool = false
@@ -33,7 +33,7 @@ struct UpdateBookStatusView: View {
                 Spacer()
                 HStack{
                     Text("Page :").padding(.leading)
-                    TextField(String(book.currentPage), text: $currentPageStr)
+                    TextField(String(book.currentPage), text: $pageStr)
                             .keyboardType(.numberPad)
                             .autocapitalization(.none)
                             .padding(.leading)
@@ -46,7 +46,6 @@ struct UpdateBookStatusView: View {
                 Spacer()
                 Button("Save      "){
                     updateHistoryAndCurrentPage()
-                    self.presentUpdateBookStatusView.toggle()
                 }.foregroundColor(.green).cornerRadius(10).padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -66,21 +65,29 @@ struct UpdateBookStatusView: View {
     }
     
     private func updateHistoryAndCurrentPage(){
-        if currentPageStr.isEmpty{
+        if pageStr.isEmpty{
             message = "Fill in 'Page'"
             showMessage.toggle()
             return
-        }else if Double(currentPageStr)! > book.totalPage{
+        }else if Double(pageStr)! > book.totalPage{
             message = "'Page' can not be bigger than total page number"
             showMessage.toggle()
             return
         }
 
+        let page = Double(pageStr)!
+        
+        if page <= 0 {
+            message = "'Page' should be a positive number"
+            showMessage.toggle()
+            return
+        }
+
         if book.history == nil || book.history?.count == 0{
-            book.currentPage = Double(currentPageStr)!
+            book.currentPage = page
             let history = History(context: viewContext)
             history.date = Calendar.current.startOfDay(for: date)
-            history.pageNo = Double(currentPageStr)!
+            history.pageNo = page
             book.history = NSOrderedSet(set: [history])
         }else{
             var foundIndex = -1
@@ -92,19 +99,71 @@ struct UpdateBookStatusView: View {
                     isReplace = true
                     return true
                 }else if comparisonResult == ComparisonResult.orderedDescending{
-                    foundIndex = index
-                    return true
+                    if foundIndex < 0{
+                        foundIndex = index
+                        return true
+                    }
                 }
-                    return false
+                return false
             }.first
             
             if foundIndex >= 0{
-                if ((book.history?.object(at: foundIndex) as! History).pageNo) > Double(currentPageStr)!{
-                    if isReplace{
-                        (book.history?.object(at: foundIndex) as! History).pageNo = Double(currentPageStr)!
+                if isReplace{
+                    if (foundIndex + 1) < book.history!.count{
+                        let laterHistory = (book.history?.object(at: foundIndex + 1) as! History)
+                        if page < laterHistory.pageNo{
+                            if (foundIndex - 1) >= 0{
+                                let prevHistory = (book.history?.object(at: foundIndex - 1) as! History)
+                                if page > prevHistory.pageNo{
+                                    (book.history?.object(at: foundIndex) as! History).pageNo = page
+                                }else{
+                                    message = "'Page' should be bigger than a previous day's page"
+                                    showMessage.toggle()
+                                    return
+                                }
+                            }else{
+                                (book.history?.object(at: foundIndex) as! History).pageNo = page
+                            }
+                        }else{
+                            message = "'Page' should be smaller than a later day's page"
+                            showMessage.toggle()
+                            return
+                        }
+                    }else{
+                        if (foundIndex - 1) >= 0{
+                            let prevHistory = (book.history?.object(at: foundIndex - 1) as! History)
+                            if page > prevHistory.pageNo{
+                                (book.history?.object(at: foundIndex) as! History).pageNo = page
+                            }else{
+                                message = "'Page' should be bigger than a previous day's page"
+                                showMessage.toggle()
+                                return
+                            }
+                        }else{
+                            (book.history?.object(at: foundIndex) as! History).pageNo = page
+                        }
+                        
+                        book.currentPage = page
+                    }
+                }else{
+                    if (foundIndex - 1) >= 0{
+                        let prevHistory = (book.history?.object(at: foundIndex - 1) as! History)
+                        if page > prevHistory.pageNo{
+                            let history = History(context: viewContext)
+                            history.pageNo = page
+                            history.date = Calendar.current.startOfDay(for: date)
+                            
+                            var newHistory = book.history?.array
+                            newHistory?.insert(history, at: foundIndex)
+                            book.history = NSOrderedSet(array: newHistory!)
+                        }else{
+                            message = "'Page' should be bigger than a previous day's page"
+                            showMessage.toggle()
+                            return
+                        }
                     }else{
                         let history = History(context: viewContext)
-                        history.pageNo = Double(currentPageStr)!
+                        history.pageNo = page
                         history.date = Calendar.current.startOfDay(for: date)
                         
                         var newHistory = book.history?.array
@@ -113,20 +172,27 @@ struct UpdateBookStatusView: View {
                     }
                 }
             }else{
-                let history = History(context: viewContext)
-                history.pageNo = Double(currentPageStr)!
-                history.date = Calendar.current.startOfDay(for: date)
-                
-                var newHistory = book.history?.array
-                newHistory?.append(history)
-                book.history = NSOrderedSet(array: newHistory!)
-                book.currentPage = Double(currentPageStr)!
+                if page > book.currentPage{
+                    let history = History(context: viewContext)
+                    history.pageNo = page
+                    history.date = Calendar.current.startOfDay(for: date)
+                    
+                    var newHistory = book.history?.array
+                    newHistory?.append(history)
+                    book.history = NSOrderedSet(array: newHistory!)
+                    book.currentPage = page
+                }else{
+                    message = "'Page' should be bigger than the current page"
+                    showMessage.toggle()
+                    return
+                }
             }
         }
         
         do {
             book.updateDate = Date()
             try viewContext.save()
+            self.presentUpdateBookStatusView.toggle()
         } catch {
             message = (error as NSError).localizedDescription
             showMessage.toggle()
