@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State var isActive: Bool = false
+    @State var openView: Bool = false
     
     var body: some View {
         ZStack {
-            if self.isActive {
+            if openView {
                 BookSummaryListView()
             } else {
                 Image(uiImage: UIImage(named: "SplashImage")!)
             }
         }.onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     withAnimation {
-                        self.isActive = true
+                        self.openView = true
                     }
                 }
             }

@@ -151,10 +151,7 @@ struct BookDetailView: View {
             showMessage.toggle()
             return
         }
-        
-        DispatchQueue.main.async {
-            self.dismiss()
-        }
+        self.dismiss()
     }
     
     private func openAddImageView(){
