@@ -128,7 +128,14 @@ struct BookDetailView: View {
                     deleteBook()
                 }
             }
-        }.scrollIndicators(.hidden).alert(message, isPresented: $showMessage) {}
+        }.gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local)
+            .onEnded({ value in
+                if value.translation.width > 0 {
+                    withAnimation{
+                        self.dismiss()
+                    }
+                }
+            })).scrollIndicators(.hidden).alert(message, isPresented: $showMessage) {}
     }
     
     private func presentConfirmation(){
