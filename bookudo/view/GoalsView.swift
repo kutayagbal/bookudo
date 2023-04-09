@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GoalsView: View {
     let goals: NSSet
+    @State var goalsArray: [Goal] = []
     let avgSpeedGoal: Double
     let today = Calendar.current.component(.weekday, from: Date())
     
@@ -21,7 +22,7 @@ struct GoalsView: View {
             
             HStack(alignment: .firstTextBaseline){
                 VStack(alignment: .leading){
-                    ForEach(Array(goals as! Set<Goal>)) { goal in
+                    ForEach(goalsArray) { goal in
                         HStack{
                             Spacer()
                             Text(goal.title!).font(Font.footnote.bold())
@@ -38,8 +39,14 @@ struct GoalsView: View {
                 }
                 Spacer()
             }
-        }
+        }.onAppear(perform: createGoalsArray)
         
+    }
+    
+    private func createGoalsArray(){
+        self.goalsArray = Array(goals as! Set<Goal>).sorted{
+            $0.title! < $1.title!
+        }
     }
 }
 
