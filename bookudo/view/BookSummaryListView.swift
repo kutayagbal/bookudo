@@ -22,11 +22,12 @@ struct BookSummaryListView: View {
     var body: some View {
         NavigationStack {
             if books.count == 0{
-                VStack{
-                    Text("Add Book")
-                }.foregroundColor(.blue).font(Font.title).onTapGesture {
+                Button("Add Book"){
                     presentAddBookView.toggle()
-                }.toolbar {
+                }.padding().overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.blue, lineWidth: 1))
+                .toolbar {
                     ToolbarItem {
                         Button(action: openAddBookView) {
                             Label("Add Book", systemImage: "plus").font(Font.system(size: 25))

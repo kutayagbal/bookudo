@@ -35,7 +35,7 @@ struct AddBookView: View {
                     HStack{
                         Button("Cover Image"){
                             presentImagePicker.toggle()
-                        }.foregroundColor(.green).cornerRadius(10).padding(7)
+                        }.foregroundColor(.green).cornerRadius(10).padding(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(.green, lineWidth: 1))
