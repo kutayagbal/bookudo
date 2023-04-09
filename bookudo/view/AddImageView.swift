@@ -11,7 +11,7 @@ struct AddImageView: View {
     @Environment(\.managedObjectContext) var viewContext
     @State var book: Book
     @Binding var presentAddImageView: Bool
-    @State var imagePage = ""
+    @State var pageStr = ""
     @State var presentImagePicker: Bool = false
     @State var images = [HashableImage]()
     @State var showMessage = false
@@ -55,7 +55,7 @@ struct AddImageView: View {
                     Spacer()
                     HStack{
                         Text("Page No :").padding(.leading)
-                        TextField(String(book.currentPage), text: $imagePage)
+                        TextField(String(book.currentPage), text: $pageStr)
                             .keyboardType(.numberPad)
                             .autocapitalization(.none)
                             .padding(.leading)
@@ -99,7 +99,7 @@ struct AddImageView: View {
             return
         }
         
-        var page = Double(imagePage) ?? nil
+        var page = Double(pageStr) ?? nil
         
         let sortDescriptor = NSSortDescriptor(key: "pageNo", ascending: true)
         

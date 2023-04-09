@@ -263,7 +263,7 @@ struct AddBookView: View {
             unit.startPage = startPage
             unit.endPage = Double(totalPageStr)!
             
-            if units.count > 0{
+            if units.count > 1{
                 units.last?.endPage = startPage - 1
             }
             self.units.append(unit)

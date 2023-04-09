@@ -28,7 +28,7 @@ struct PageImagesView: View {
                 }.multilineTextAlignment(.center).padding(.top, 40)
                 
                 HStack{
-                    Text("Page: " + String(expandedImg!.pageNo!)).font(.title3).padding()
+                    Text("Page: " + String(format: "%.2f", expandedImg!.pageNo!)).font(.title3).padding()
                     Spacer()
                     Button("DELETE") {
                         presentConfirmDelete.toggle()
@@ -79,7 +79,7 @@ struct PageImagesView: View {
                                             HStack{
                                                 Spacer()
                                                 VStack{
-                                                    Text("Page: " + String(img.pageNo!)).font(.system(size: 11))
+                                                    Text("Page: " + String(format: "%.2f", img.pageNo!)).font(.system(size: 11))
                                                     Image(uiImage: img.image).resizable().scaledToFit().onTapGesture {
                                                         withAnimation{
                                                             expandedImg = img
