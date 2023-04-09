@@ -99,7 +99,7 @@ struct AddBookView: View {
                 
                 VStack{
                     HStack{
-                        Text("Units")
+                        Text("Chapters")
                         Spacer()
                     }.frame(height: 10)
                     VStack{
@@ -238,7 +238,7 @@ struct AddBookView: View {
             showMessage.toggle()
             return
         }else if unitTitle.isEmpty{
-            message = "Fill in 'Title' for unit"
+            message = "Fill in 'Title' for chapter"
             showMessage.toggle()
             return
         }else if unitStartPageStr.isEmpty{
