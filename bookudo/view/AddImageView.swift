@@ -101,14 +101,39 @@ struct AddImageView: View {
         
         var page = Double(imagePage) ?? nil
         
+        let sortDescriptor = NSSortDescriptor(key: "pageNo", ascending: true)
+        
         if page != nil{
-            book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
-                let pageImg = PageImage(context: viewContext)
-                pageImg.pageNo = page!
-                pageImg.data = element.image.jpegData(compressionQuality: 0.8)
-                page! += 1
-                return pageImg
-            }) as! Set<AnyHashable>)) as NSSet?
+            if page! < 1{
+                let latestImage = book.images!.sortedArray(using: [sortDescriptor]).filter{
+                    if ($0 as! PageImage).pageNo < 1{
+                        return true
+                    }
+                    return false
+                }.last as? PageImage
+                
+                page = 0.01
+                if latestImage != nil{
+                    page = latestImage!.pageNo + 0.01
+                }
+                
+                book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
+                    let pageImg = PageImage(context: viewContext)
+                    pageImg.pageNo = page!
+                    pageImg.data = element.image.jpegData(compressionQuality: 0.8)
+                    page! += 0.01
+                    return pageImg
+                }) as! Set<AnyHashable>)) as NSSet?
+            }else{
+                book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
+                    let pageImg = PageImage(context: viewContext)
+                    pageImg.pageNo = page!
+                    pageImg.data = element.image.jpegData(compressionQuality: 0.8)
+                    page! += 1
+                    return pageImg
+                }) as! Set<AnyHashable>)) as NSSet?
+            }
+            
             do {
                 book.updateDate = Date()
                 try viewContext.save()

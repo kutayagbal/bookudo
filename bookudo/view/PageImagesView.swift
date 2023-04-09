@@ -165,9 +165,8 @@ struct PageImagesView: View {
         
         var images:[HashableImage] = []
         let sortDescriptor = NSSortDescriptor(key: "pageNo", ascending: true)
-        let eqDescriptor = NSSortDescriptor(key: "objectID", ascending: true)
         
-        for image in book.images!.sortedArray(using: [sortDescriptor, eqDescriptor]){
+        for image in book.images!.sortedArray(using: [sortDescriptor]){
             let img  = image as! PageImage
             if img.pageNo <= unit.endPage && img.pageNo >= unit.startPage{
                 images.append(HashableImage(image: UIImage(data: img.data!)!, id: UUID(), pageNo: img.pageNo, objectID: img.objectID))
