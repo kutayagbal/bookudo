@@ -128,7 +128,7 @@ struct BookDetailView: View {
                     deleteBook()
                 }
             }
-        }.gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local)
+        }.gesture(DragGesture(minimumDistance: 15, coordinateSpace: .local)
             .onEnded({ value in
                 if value.translation.width > 0 {
                     withAnimation{
