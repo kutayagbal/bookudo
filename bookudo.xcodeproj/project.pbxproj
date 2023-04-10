@@ -39,6 +39,7 @@
 		AD7E7B5629DA4253009E12C0 /* History+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4C29DA4253009E12C0 /* History+CoreDataProperties.swift */; };
 		AD7E7B5729DA4253009E12C0 /* Unit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4D29DA4253009E12C0 /* Unit+CoreDataClass.swift */; };
 		AD7E7B5829DA4253009E12C0 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7E7B4E29DA4253009E12C0 /* Unit+CoreDataProperties.swift */; };
+		ADC9B1A029E40C0500267162 /* PageImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC9B19F29E40C0500267162 /* PageImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		AD7E7B4C29DA4253009E12C0 /* History+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "History+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AD7E7B4D29DA4253009E12C0 /* Unit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AD7E7B4E29DA4253009E12C0 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ADC9B19F29E40C0500267162 /* PageImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				AD7E7B3029DA1B07009E12C0 /* SplashView.swift */,
 				AD7E7B3129DA1B07009E12C0 /* BookSummaryListItemView.swift */,
 				AD7E7B3229DA1B07009E12C0 /* UpdateGoalsView.swift */,
+				ADC9B19F29E40C0500267162 /* PageImageView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				AD7E7B3F29DA1B07009E12C0 /* AddImageView.swift in Sources */,
 				AD7E7B5729DA4253009E12C0 /* Unit+CoreDataClass.swift in Sources */,
 				AD7E7B4029DA1B07009E12C0 /* SplashView.swift in Sources */,
+				ADC9B1A029E40C0500267162 /* PageImageView.swift in Sources */,
 				AD7E7B5829DA4253009E12C0 /* Unit+CoreDataProperties.swift in Sources */,
 				AD7E7B4F29DA4253009E12C0 /* PageImage+CoreDataClass.swift in Sources */,
 				AD7E7B3E29DA1B07009E12C0 /* UpdateBookStatusView.swift in Sources */,

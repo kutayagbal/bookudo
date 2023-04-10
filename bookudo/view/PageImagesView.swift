@@ -13,43 +13,13 @@ struct PageImagesView: View {
     @Binding var presentPageImagesView: Bool
     @State private var expandedUnit: Unit?
     @State var presentConfirmDelete = false
-    @State private var expandedImg: HashableImage?
     @State var showMessage = false
     @State var message = ""
+    @State var expandedUnitImages: [HashableImage] = []
     
     var body: some View {
         VStack{
-            if expandedImg != nil{
-                VStack{
-                    Text(book.title!).font(.title2).padding(3)
-                    if book.subTitle != nil{
-                        Text(book.subTitle!).font(.caption).padding(2)
-                    }
-                }.multilineTextAlignment(.center).padding(.top, 40)
-                
-                HStack{
-                    Text("Page: " + String(format: "%.2f", expandedImg!.pageNo!)).font(.title3).padding()
-                    Spacer()
-                    Button("DELETE") {
-                        presentConfirmDelete.toggle()
-                                            }.foregroundColor(.red).cornerRadius(10).padding().overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(.red, lineWidth: 1))
-                                            .padding(.trailing)
-                }.padding()
-                    .confirmationDialog("", isPresented: $presentConfirmDelete){
-                    Button("Delete image", role: .destructive) {
-                        deleteImage()
-                    }
-                }
-                
-                Image(uiImage: expandedImg!.image).resizable().scaledToFit().onTapGesture {
-                    withAnimation{
-                        expandedImg = nil
-                    }
-                }.cornerRadius(10.0)
-                Spacer()
-            }else{
+            NavigationStack {
                 VStack{
                     HStack{
                         VStack{
@@ -66,7 +36,7 @@ struct PageImagesView: View {
                                 HStack{
                                     Text(unit.title!)
                                     Spacer()
-                                    Text(String(getImageCount(unit: unit)))
+                                    Text(String(getUnitImageCount(unit: unit)))
                                 }.padding(5).padding(.top, 7).contentShape(Rectangle()).onTapGesture {
                                     withAnimation{
                                         expandedUnit = nil
@@ -75,24 +45,23 @@ struct PageImagesView: View {
                                 
                                 ScrollView(.horizontal){
                                     LazyHStack{
-                                        ForEach(getUnitImages(unit: unit), id: \.id){ img in
-                                            HStack{
-                                                Spacer()
-                                                VStack{
-                                                    Text("Page: " + String(format: "%.2f", img.pageNo!)).font(.system(size: 11))
-                                                    Image(uiImage: img.image).resizable().scaledToFit().onTapGesture {
-                                                        withAnimation{
-                                                            expandedImg = img
-                                                        }
-                                                    }.cornerRadius(10.0).frame(maxHeight: 100)
-                                                }.padding(5).overlay(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(.yellow, lineWidth: 0.5))
-                                                Spacer()
+                                        ForEach(expandedUnitImages, id: \.id){ img in
+                                            NavigationLink(destination: PageImageView(book: book, expandedImg: img)){
+                                                HStack{
+                                                    Spacer()
+                                                    VStack{
+                                                        Text("Page: " + String(format: "%.2f", img.pageNo!)).font(.system(size: 11)).foregroundColor(Color(UIColor.systemGray))
+                                                        Image(uiImage: img.image).resizable().scaledToFit().cornerRadius(10.0).frame(maxHeight: 100)
+                                                    }.padding(5).background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(Color(UIColor.systemGray6)))
+                                                    Spacer()
+                                                }
                                             }
                                         }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
                                     }
                                 }
+                                
                             }.frame(minHeight: 150).alignmentGuide(.listRowSeparatorTrailing) { d in
                                 d[.trailing]
                             }
@@ -100,11 +69,12 @@ struct PageImagesView: View {
                             HStack{
                                 Text(unit.title!)
                                 Spacer()
-                                Text(String(getImageCount(unit: unit)))
+                                Text(String(getUnitImageCount(unit: unit)))
                             }.padding(5).contentShape(Rectangle()).onTapGesture {
-                                if getImageCount(unit: unit) > 0{
+                                if getUnitImageCount(unit: unit) > 0{
                                     withAnimation{
                                         expandedUnit = unit
+                                        setExpandedUnitImages()
                                     }
                                 }
                             }.alignmentGuide(.listRowSeparatorTrailing) { d in
@@ -112,36 +82,12 @@ struct PageImagesView: View {
                             }
                         }
                     }.scrollContentBackground(.hidden).scrollIndicators(.hidden)
-                }
-            }
-        }.transition(.scale).alert(message, isPresented: $showMessage) {}
-    }
-    
-    
-    private func deleteImage(){
-        if expandedImg != nil{
-            let delImg = book.images?.filter({($0 as! PageImage).objectID.isEqual(expandedImg!.objectID!)}).first as? PageImage
-            
-            if delImg != nil{
-                do {
-                    book.updateDate = Date()
-                    viewContext.delete(delImg!)
-                    try viewContext.save()
-                    withAnimation{
-                        expandedImg = nil
-                        expandedUnit = nil
-                    }
-                    presentConfirmDelete.toggle()
-                } catch {
-                    message = (error as NSError).localizedDescription
-                    showMessage.toggle()
-                    return
-                }
+                }.background(Color(UIColor.systemGray6)).onAppear(perform: setExpandedUnitImages)
             }
         }
     }
-    
-    private func getImageCount(unit: Unit) -> Int{
+
+    private func getUnitImageCount(unit: Unit) -> Int{
         if book.images == nil || book.images?.count == 0{
             return 0
         }
@@ -158,9 +104,10 @@ struct PageImagesView: View {
         return total
     }
     
-    private func getUnitImages(unit: Unit) -> [HashableImage]{
-        if book.images == nil || book.images?.count == 0{
-            return []
+    private func setExpandedUnitImages(){
+        if expandedUnit == nil{
+            expandedUnitImages = []
+            return
         }
         
         var images:[HashableImage] = []
@@ -168,12 +115,15 @@ struct PageImagesView: View {
         
         for image in book.images!.sortedArray(using: [sortDescriptor]){
             let img  = image as! PageImage
-            if img.pageNo <= unit.endPage && img.pageNo >= unit.startPage{
+            if img.pageNo <= expandedUnit!.endPage && img.pageNo >= expandedUnit!.startPage{
                 images.append(HashableImage(image: UIImage(data: img.data!)!, id: UUID(), pageNo: img.pageNo, objectID: img.objectID))
             }
         }
         
-        return images
+        if images.isEmpty{
+            expandedUnit = nil
+        }
+        expandedUnitImages = images
     }
 }
 
