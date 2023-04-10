@@ -15,14 +15,12 @@ struct PageImageView: View {
     @State private var presentConfirmDelete = false
     @State private var showMessage = false
     @State private var message = ""
+    let unitTitle: String
     
     var body: some View {
         VStack{
             VStack{
-                Text(book.title!).font(.title2).padding(3)
-                if book.subTitle != nil{
-                    Text(book.subTitle!).font(.caption).padding(2)
-                }
+                Text(unitTitle).font(.title2).padding(3)
             }.multilineTextAlignment(.center).padding(.top)
             
             HStack{
@@ -77,6 +75,6 @@ struct PageImageView: View {
 
 struct PageImageView_Previews: PreviewProvider {
     static var previews: some View {
-        PageImageView(book: Book(), expandedImg: nil)
+        PageImageView(book: Book(), expandedImg: nil, unitTitle: "")
     }
 }

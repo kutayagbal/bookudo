@@ -46,7 +46,7 @@ struct PageImagesView: View {
                                 ScrollView(.horizontal){
                                     LazyHStack{
                                         ForEach(expandedUnitImages, id: \.id){ img in
-                                            NavigationLink(destination: PageImageView(book: book, expandedImg: img)){
+                                            NavigationLink(destination: PageImageView(book: book, expandedImg: img, unitTitle: unit.title!)){
                                                 HStack{
                                                     Spacer()
                                                     VStack{
