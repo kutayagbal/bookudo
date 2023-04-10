@@ -26,21 +26,21 @@ struct PageImageView: View {
             }.multilineTextAlignment(.center).padding(.top)
             
             HStack{
+                Spacer()
                 Text("Page: " + String(format: "%.2f", expandedImg!.pageNo!)).font(.body).padding()
                 Spacer()
-                Button("DELETE") {
+                Button("Delete") {
                     presentConfirmDelete.toggle()
-                                        }.foregroundColor(.red).cornerRadius(10).padding().overlay(
+                                        }.foregroundColor(.red).cornerRadius(10).padding(10).overlay(
                                             RoundedRectangle(cornerRadius: 10)
                                                 .stroke(.red, lineWidth: 1))
                                         .padding(.trailing)
-            }.padding()
+                Spacer()
+            }
             
             Spacer()
             
             Image(uiImage: expandedImg!.image).resizable().scaledToFit().cornerRadius(10.0)
-            
-            Spacer()
         }.gesture(DragGesture(minimumDistance: 5, coordinateSpace: .local)
             .onEnded({ value in
                 if value.translation.width > 0 {

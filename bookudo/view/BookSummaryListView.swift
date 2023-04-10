@@ -41,7 +41,7 @@ struct BookSummaryListView: View {
                     ForEach(books) {book in
                         NavigationLink(destination: BookDetailView(book: book)){
                             BookSummaryListItemView(book: book)
-                                .navigationTitle("BOOKS").contentShape(Rectangle())
+                                .navigationTitle("Books").contentShape(Rectangle())
                         }.buttonStyle(PlainButtonStyle())
                     }.toolbar {
                             ToolbarItem {
