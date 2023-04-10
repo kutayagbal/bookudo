@@ -26,7 +26,7 @@ struct PageImageView: View {
             }.multilineTextAlignment(.center).padding(.top)
             
             HStack{
-                Text("Page: " + String(format: "%.2f", expandedImg!.pageNo!)).font(.title3).padding()
+                Text("Page: " + String(format: "%.2f", expandedImg!.pageNo!)).font(.body).padding()
                 Spacer()
                 Button("DELETE") {
                     presentConfirmDelete.toggle()
@@ -35,23 +35,24 @@ struct PageImageView: View {
                                                 .stroke(.red, lineWidth: 1))
                                         .padding(.trailing)
             }.padding()
-                .confirmationDialog("", isPresented: $presentConfirmDelete){
-                Button("Delete image", role: .destructive) {
-                    deleteImage()
-                }
-            }.alert(message, isPresented: $showMessage) {}
             
             Spacer()
+            
             Image(uiImage: expandedImg!.image).resizable().scaledToFit().cornerRadius(10.0)
+            
             Spacer()
-        }.gesture(DragGesture(minimumDistance: 15, coordinateSpace: .local)
+        }.gesture(DragGesture(minimumDistance: 5, coordinateSpace: .local)
             .onEnded({ value in
                 if value.translation.width > 0 {
                     withAnimation{
                         self.dismiss()
                     }
                 }
-            }))
+            })).confirmationDialog("", isPresented: $presentConfirmDelete){
+                Button("Delete image", role: .destructive) {
+                    deleteImage()
+                }
+            }.alert(message, isPresented: $showMessage) {}
     }
     
     
