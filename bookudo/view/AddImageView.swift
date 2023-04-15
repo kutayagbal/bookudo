@@ -120,7 +120,7 @@ struct AddImageView: View {
                 book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
                     let pageImg = PageImage(context: viewContext)
                     pageImg.pageNo = page!
-                    pageImg.data = element.image.jpegData(compressionQuality: 0.8)
+                    pageImg.data = element.image.jpegData(compressionQuality: 0.0)
                     page! += 0.01
                     return pageImg
                 }) as! Set<AnyHashable>)) as NSSet?
@@ -128,7 +128,7 @@ struct AddImageView: View {
                 book.images = book.images?.addingObjects(from: (NSSet(array: images.enumerated().map{ (index, element) in
                     let pageImg = PageImage(context: viewContext)
                     pageImg.pageNo = page!
-                    pageImg.data = element.image.jpegData(compressionQuality: 0.8)
+                    pageImg.data = element.image.jpegData(compressionQuality: 0.0)
                     page! += 1
                     return pageImg
                 }) as! Set<AnyHashable>)) as NSSet?

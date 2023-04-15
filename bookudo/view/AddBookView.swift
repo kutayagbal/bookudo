@@ -199,7 +199,7 @@ struct AddBookView: View {
         
         if totalPage > 0{
             let book = Book(context: viewContext)
-            book.cover = images[0].image.jpegData(compressionQuality: 0.8)
+            book.cover = images[0].image.jpegData(compressionQuality: 0.0)
             book.title = title
             book.subTitle = subTitle
             book.totalPage = totalPage
