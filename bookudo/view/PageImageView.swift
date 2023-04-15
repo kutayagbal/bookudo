@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+//import Vision
 
 struct PageImageView: View {
     @Environment(\.dismiss) var dismiss
@@ -16,6 +17,7 @@ struct PageImageView: View {
     @State private var showMessage = false
     @State private var message = ""
     let unitTitle: String
+//    @State private var recognizedText = ""
     
     var body: some View {
         VStack{
@@ -39,7 +41,9 @@ struct PageImageView: View {
             Spacer()
             
             Image(uiImage: expandedImg!.image).resizable().scaledToFit().cornerRadius(10.0)
-        }.gesture(DragGesture(minimumDistance: 5, coordinateSpace: .local)
+//            Text(recognizedText).font(.caption2)
+        }//.onAppear(perform: recognizeText)
+            .gesture(DragGesture(minimumDistance: 5, coordinateSpace: .local)
             .onEnded({ value in
                 if value.translation.width > 0 {
                     withAnimation{
@@ -70,6 +74,37 @@ struct PageImageView: View {
             }
         }
     }
+    
+//    private func recognizeText(){
+//        guard let cgImage = expandedImg?.image.cgImage else { return }
+//
+//        // Create a new image-request handler.
+//        let requestHandler = VNImageRequestHandler(cgImage: cgImage)
+//
+//        // Create a new request to recognize text.
+//        let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
+//
+//        do {
+//            // Perform the text-recognition request.
+//            try requestHandler.perform([request])
+//        } catch {
+//            print("Unable to perform the requests: \(error).")
+//        }
+//    }
+//
+//    private func recognizeTextHandler(request: VNRequest, error: Error?) {
+//        guard let observations =
+//                request.results as? [VNRecognizedTextObservation] else {
+//            return
+//        }
+//        let recognizedStrings = observations.compactMap { observation in
+//            // Return the string of the top VNRecognizedText instance.
+//            return observation.topCandidates(1).first?.string
+//        }
+//
+//        // Process the recognized strings.
+//        recognizedText = recognizedStrings.joined()
+//    }
 }
 
 
