@@ -32,8 +32,8 @@ struct ProgressGoalChartView: View {
                             y: .value("PageNo", goal.pageNo!)
                         ).foregroundStyle(.red)
                             .annotation(position: goal.position ?? .bottom){
-                                Text(String(format: "%.1f", goal.pageNo!)).foregroundColor(.red).font(.system(size: 10))
-                            }.foregroundStyle(by: .value("ChartType", "Goal"))
+                                Text(isWhole(value: goal.pageNo) ? String(format: "%.0f", goal.pageNo!) : String(format: "%.1f", goal.pageNo!)).foregroundColor(.red).font(.system(size: 10))
+                            }
                     }
                     
                     ForEach(chartData) { data in
@@ -48,8 +48,8 @@ struct ProgressGoalChartView: View {
                             y: .value("PageNo", data.pageNo!)
                         ).foregroundStyle(.blue)
                             .annotation(position: data.position ?? .top){
-                                Text(String(format: "%.1f", data.pageNo!)).foregroundColor(.blue).font(.system(size: 10))
-                            }.foregroundStyle(by: .value("ChartType", "Progress"))
+                                Text(isWhole(value: data.pageNo) ? String(format: "%.0f", data.pageNo!) : String(format: "%.1f", data.pageNo!)).foregroundColor(.blue).font(.system(size: 10))
+                            }
                     }
                 }.chartForegroundStyleScale(["Goal": .red, "Progress": .blue])
                     .chartXAxis {
@@ -68,7 +68,7 @@ struct ProgressGoalChartView: View {
                             )
                         }
                     }
-                }.padding(7)
+                }.padding(3)
             }else{
                 Chart(){
                     ForEach(goalData) { goal in
@@ -103,9 +103,17 @@ struct ProgressGoalChartView: View {
                             )
                         }
                     }
-                }.padding(7)
+                }.padding(3)
             }
         }
+    }
+    
+    private func isWhole(value:Double?) -> Bool{
+        if value == nil{
+            return false
+        }
+        
+        return value!.isEqual(to: value!.rounded())
     }
 }
 

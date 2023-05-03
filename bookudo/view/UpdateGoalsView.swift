@@ -35,14 +35,14 @@ struct UpdateGoalsView: View {
                 HStack{
                     Text("Weekday :").padding(.leading)
                     TextField(String(getWeekdayGoal()), text: $weekGoalStr)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                         .autocapitalization(.none)
                         .padding(.leading)
                 }
                 HStack{
                     Text("Weekend :").padding()
                     TextField(String(getWeekendGoal()), text: $weekendGoalStr)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                         .autocapitalization(.none)
                         .padding(.leading)
                 }
