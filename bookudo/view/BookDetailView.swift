@@ -118,7 +118,7 @@ struct BookDetailView: View {
             }.onAppear(perform:createProgressData).sheet(isPresented: $presentUpdateBookStatusView, onDismiss: onDissmiss) {
                 UpdateBookStatusView(presentUpdateBookStatusView: $presentUpdateBookStatusView, book: book)
             }.sheet(isPresented: $presentAddImageView, onDismiss: onDissmiss) {
-                AddImageView(book: book, presentAddImageView: $presentAddImageView)
+                AddImageView(book: book, presentAddImageView: $presentAddImageView, presentImagePicker: true)
             }.sheet(isPresented: $presentPageImagesView, onDismiss: onDissmiss) {
                 PageImagesView(book: book, presentPageImagesView: $presentPageImagesView)
             }.sheet(isPresented: $presentUpdateGoalsView, onDismiss: onDissmiss){

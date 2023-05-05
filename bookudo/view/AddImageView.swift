@@ -12,7 +12,7 @@ struct AddImageView: View {
     @State var book: Book
     @Binding var presentAddImageView: Bool
     @State var pageStr = ""
-    @State var presentImagePicker: Bool = false
+    @State var presentImagePicker: Bool
     @State var images = [HashableImage]()
     @State var showMessage = false
     @State var message = ""
@@ -83,7 +83,7 @@ struct AddImageView: View {
                     Spacer()
                 }.padding()
             
-        }.padding().sheet(isPresented: $presentImagePicker){
+        }.disabled(presentImagePicker).padding().sheet(isPresented: $presentImagePicker){
             ImagePicker(images: self.$images)
         }.alert(message, isPresented: $showMessage) {}
     }
@@ -94,7 +94,7 @@ struct AddImageView: View {
     
     private func saveImages(){
         if images.isEmpty{
-            message = "Tap to Plus button to add an image"
+            message = "Tap to Add Image button to add an image"
             showMessage.toggle()
             return
         }
@@ -153,9 +153,9 @@ struct AddImageView: View {
 
 struct AddImageView_Previews: PreviewProvider {
     static var previews: some View {
-        AddImageView(book: PersistenceController.selectedBook!, presentAddImageView: .constant(true))
+        AddImageView(book: PersistenceController.selectedBook!, presentAddImageView: .constant(true), presentImagePicker: true)
         
-        AddImageView(book: PersistenceController.selectedBook!, presentAddImageView: .constant(true)).previewDevice(PreviewDevice(rawValue: "iPhone 14 Plus"))
+        AddImageView(book: PersistenceController.selectedBook!, presentAddImageView: .constant(true), presentImagePicker: true).previewDevice(PreviewDevice(rawValue: "iPhone 14 Plus"))
             .previewDisplayName("iPhone 14 Plus")
     }
 }
