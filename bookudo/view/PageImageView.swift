@@ -16,6 +16,10 @@ struct PageImageView: View {
     @State private var presentConfirmDelete = false
     @State private var showMessage = false
     @State private var message = ""
+    @State private var zoomScale = 1.0
+    @State private var dragOffset = CGSize.zero
+    @State private var dragLocation = CGPoint.zero
+    
     let unitTitle: String
 //    @State private var recognizedText = ""
     
@@ -31,16 +35,44 @@ struct PageImageView: View {
                 Spacer()
                 Button("Delete") {
                     presentConfirmDelete.toggle()
-                                        }.foregroundColor(.red).cornerRadius(10).padding(10).overlay(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(.red, lineWidth: 1))
-                                        .padding(.trailing)
+                }.foregroundColor(.red).cornerRadius(10).padding(10).overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.red, lineWidth: 1))
+                .padding(.trailing)
                 Spacer()
             }
             
             Spacer()
             
-            Image(uiImage: expandedImg!.image).resizable().scaledToFit().cornerRadius(10.0)
+            Image(uiImage: expandedImg!.image).resizable().scaledToFit().cornerRadius(10.0).offset(dragOffset).scaleEffect(zoomScale)
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged {amount in
+                            withAnimation{
+                                zoomScale = amount
+                            }
+                        }
+                ).simultaneousGesture(
+                    DragGesture()
+                        .onChanged{ drag in
+                            if dragOffset != .zero{
+                                withAnimation{
+                                    dragOffset.width = dragLocation.x + drag.translation.width
+                                    dragOffset.height = dragLocation.y + drag.translation.height
+                                }
+                            }else{
+                                withAnimation{
+                                    dragOffset = drag.translation
+                                }
+                            }
+                        }.onEnded{ drag in
+                            withAnimation{
+                                dragLocation.x += drag.translation.width
+                                dragLocation.y += drag.translation.height
+                            }
+                        }
+                    )
+                
 //            Text(recognizedText).font(.caption2)
         }//.onAppear(perform: recognizeText)
             .gesture(DragGesture(minimumDistance: 5, coordinateSpace: .local)
@@ -50,7 +82,8 @@ struct PageImageView: View {
                         self.dismiss()
                     }
                 }
-            })).confirmationDialog("", isPresented: $presentConfirmDelete){
+            }))
+            .confirmationDialog("", isPresented: $presentConfirmDelete){
                 Button("Delete image", role: .destructive) {
                     deleteImage()
                 }
